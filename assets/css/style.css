@@ -2,3 +2,19 @@
     margin: 1em 0;
     cursor: move;
   }
+
+  .fc-event-container {
+    position: relative;
+}
+
+  .closon {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #FFF;
+}
+.fc-content:hover{
+    background-color:#00CCFF;
+}
