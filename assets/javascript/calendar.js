@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
         events: [
             {
                 title: 'All Day Event',
-                start: '2020-01-11'
+                start: '2020-01-11',
+                allDay:true
             },
             {
                 title: 'Long Event',
