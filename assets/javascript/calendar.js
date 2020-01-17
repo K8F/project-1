@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
         plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
         defaultView: 'dayGridMonth',
         defaultDate: '2020-01-01',
-        height: 700,
+        height: 500,
+        aspectRatio: 2,
         selectable: true,
         unselectAuto: true,
         header: {
