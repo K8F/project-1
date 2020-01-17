@@ -1,13 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Book Reading List</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!--fullcalendar api link -->
+    <link href='fullcalendar-4.3.1/packages/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar-4.3.1/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar-4.3.1/packages/list/main.css' rel='stylesheet' />
+    <link href='fullcalendar-4.3.1/packages/timegrid/main.css' rel='stylesheet' />
+
+    <script src='fullcalendar-4.3.1/packages/core/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/daygrid/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/list/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/timegrid/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/interaction/main.js'></script>
+
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 </head>
+
 <body>
-    <h1>Test</h1>
-    <h1>Ian Test</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div id='external-events'>
+                    <p>
+                        <strong>Draggable Events</strong>
+                    </p>
+                    <div class='fc-event'>My Event 1</div>
+                    <div class='fc-event'>My Event 2</div>
+                    <div class='fc-event'>My Event 3</div>
+                    <div class='fc-event'>My Event 4</div>
+                    <div class='fc-event'>My Event 5</div>
+                    <p>
+                        <input type='checkbox' id='drop-remove' />
+                        <label for='drop-remove'>remove after drop</label>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div id='calendar'></div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+<script src="assets/javascript/calendar.js"></script>
+
 </html>
