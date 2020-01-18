@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
         defaultView: 'dayGridMonth',
         defaultDate: '2020-01-01',
-        height: 500,
+        height: 400,
         aspectRatio: 2,
         selectable: true,
         unselectAuto: true,
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         select: function (info) {
             var title
-            $('.modal').modal()
+            $('.event-modal').modal()
             $('.modal-save').on('click', function () {
                 //console.log("modal")
                 title = $("#event-input").val()
