@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reading is Fun!</title>
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!--Bootstrap javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="text-center">Reading Is Fun</h1>
+      </div>
+      <div class="container">
+            <div class="row" id="teacher-button">
+                <a class="btn btn-dark" href="index.html" role="button">Teacher Portal</a>
+            </div> 
+            <div class="row" id="main-section">
+                <div class="col-8">
+                    <div class="row" id="display-book">
+                        <div id="book-cover">
+
+                        </div>
+                        <div id="book-description">
+                            <p>text text text blah blah blah</p>
+                        </div>
+                        <div id="finished-book">
+                        <button type="button" class="btn btn-dark" >Finished Book</button>
+                        </div>
+                        <div id="display-gif">
+
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-4">
+                        <div class="row" id="next-book">
+
+                        </div>
+                        <div class="row" id="book-requests">
+                            <form id="request-book"></form>
+                                <label for="user-input">Reading List Requests</label>
+                
+                                <input id="add-book" type="text">
+                                <button id="add">Submit</button>
+                            </form>
+                        </div>
+                        <div class="row" id="countdown">
+                            <p>abc</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    
+<script src="assets/javascript/app.js"></script>    
+</body>
+</html>
