@@ -52,8 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("checked")
             if (checkbox.checked) {
                 // if so, remove the element from the "Draggable Events" list
-                console.log("checked")
-                info.draggedEl.parentNode.removeChild(info.draggedEl);
+                console.log(info.draggedEl.parentNode)
+                //info.draggedEl.parentNode.removeChild(info.draggedEl);
+                $(info.draggedEl.parentNode).remove()
             }
         },
         eventClick: function (info) {

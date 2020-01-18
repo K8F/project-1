@@ -55,15 +55,16 @@
 
 
                         <!-- Button triggers new Item to be added -->
-                        <input id="search-book" type="submit" value="Search">
+                        <input id="search-book" type="submit" class="btn btn-primary" value="Search">
                     </div>
 
                 </form>
 
                 <div id='external-events'>
-                    <p>
+                    <p class="text-center">
                         <strong>Reading List</strong>
-                    </p>
+                   </p>
+                   <!--
                     <div class='fc-event'>My Event 1</div>
                     <div class='fc-event'>My Event 2</div>
                     <div class='fc-event'>My Event 3</div>
@@ -71,7 +72,23 @@
                     <div class='fc-event'>My Event 5</div>
                     <p>
                         <input type='checkbox' id='drop-remove' />
-                        <label for='drop-remove'>remove after drop</label>
+                        <label for='drop-remove'>Remove After Drop</label>
+                    </p>-->
+
+                    <table class="reading-list table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>                                                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <p>
+                        <input type='checkbox' id='drop-remove' />
+                        <label for='drop-remove'>Remove After Drop</label>
                     </p>
 
 
@@ -110,7 +127,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Thumbnail</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Author</th>
                                 <th scope="col">Check for adding to Reading List</th>                                
