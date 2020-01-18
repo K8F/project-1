@@ -1,0 +1,32 @@
+#external-events .fc-event {
+    margin: 1em 0;
+    cursor: move;
+  }
+
+  .fc-event-container {
+    position: relative;
+}
+
+  .closon {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #FFF;
+}
+.fc-content:hover{
+    background-color:#00CCFF;
+}
+
+.box {
+  background-color: #00CCFF;
+  font-style: italic; 
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 10px;
+  border: 6px solid rgb(70, 70, 70);
+  text-align: center;
+}
