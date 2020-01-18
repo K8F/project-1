@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $('.modal-save').on('click', function () {
                 //console.log("modal")
                 title = $("#event-input").val()
-                //console.log(title)
+                console.log(title)
                 if (title) {
                     calendar.addEvent({
                         title: title,
@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         end: info.end
                     })
                 }
+                $("#event-input").val("")
                 $('.modal').modal("hide");
 
             })
