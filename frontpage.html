@@ -25,34 +25,56 @@
 
 </head>
 <body>
+
+    <!--Page Heading-->
     <div class="jumbotron">
         <h1 class="text-center">Reading Is Fun</h1>
       </div>
+
+      <!--Teacher Button-->
       <div class="container">
             <div class="row" id="teacher-button">
                 <a class="btn btn-dark" href="index.html" role="button">Teacher Portal</a>
             </div> 
+
+            <!--Main Body-->
             <div class="row" id="main-section">
+
+                <!--2/3 column-->
                 <div class="col-8">
-                    <div class="row" id="display-book">
+
+                    <!--Section for current book and anmiation when student finishes book-->
+                    <div id="current-book">
+
+                        <!--Displays cover for the book student is currently reading-->
                         <div id="book-cover">
 
                         </div>
+
+                        <!--Displays short description for the book the student is currently reading-->
                         <div id="book-description">
                             <p>text text text blah blah blah</p>
                         </div>
-                        <div id="finished-book">
+
+                        <!--Button student clicks when book is finished-->
                         <button type="button" class="btn btn-dark" >Finished Book</button>
-                        </div>
+
+                        <!--Displays gif when student clicks finished button-->
                         <div id="display-gif">
 
                         </div>
                     </div> 
                 </div>
+
+                <!--1/3 column-->
                 <div class="col-4">
+
+                        <!--Shows bookshelf-->
                         <div class="row" id="next-book">
 
                         </div>
+
+                        <!--Form to submit new requests-->
                         <div class="row" id="book-requests">
                             <form id="request-book"></form>
                                 <label for="user-input">Reading List Requests</label>
@@ -61,6 +83,8 @@
                                 <button id="add">Submit</button>
                             </form>
                         </div>
+
+                        <!--Displays # of days until book must be complete-->
                         <div class="row" id="countdown">
                             <p>abc</p>
                         </div>
