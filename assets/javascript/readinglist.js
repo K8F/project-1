@@ -1,4 +1,4 @@
-//pull books from goodread
+//pull books from google books
 
 $("#search-book").on("click", function () {
 
@@ -21,7 +21,7 @@ $("#search-book").on("click", function () {
         .then(function (response) {
             var results = response.items;
             console.log(results)
-
+            //loop thorigh reponse object
             for (var i = 0; i < results.length; i++) {
                 var title = results[i].volumeInfo.title
                 var image = results[i].volumeInfo.imageLinks.smallThumbnail
@@ -40,6 +40,7 @@ $("#search-book").on("click", function () {
                          authorList = authors[0]
                      }
                  }*/
+                 //create new div and add each response index to div and add to modal window
                 var gifDiv = `<tr>
                 <td> <img src=${image} class="img-fluid" style=width:40px></td>
                 <td>${title}</td>
@@ -48,10 +49,14 @@ $("#search-book").on("click", function () {
                 </tr>`
                 $(".book-modal .modal-content .table").last().append(gifDiv)
             }
+
+            //show modal window, this is bootstrap library
             $('.book-modal').modal()
+
+            //array of all books from the modal window table
             var tableCheckBox = $(".book-modal .modal-content .table .markFor-reading")
-            console.log(tableCheckBox)
-            var arrayOfValues = [];
+
+            //console.log(tableCheckBox)            
             /* $('.markFor-reading').change(function() {
                  if(this.checked) {
                      console.log(this)
@@ -60,7 +65,12 @@ $("#search-book").on("click", function () {
                  }
                  console.log(arrayOfValues)
              });*/
+
+             //logic after use select the book and click on the add to list button in modal window, 
+             //add selected books to reading list
+
             $('.book-save').on('click', function () {
+                //go though all books from the modasl window and chek checked box value and create new div for reading list addition
                 for (var i = 0; i < tableCheckBox.length; i++) {
                     if (tableCheckBox[i].checked) {
                         var row = tableCheckBox[i].parentNode.parentNode;
@@ -68,7 +78,7 @@ $("#search-book").on("click", function () {
                         var cell1 = row.cells[1].innerHTML
                         var cell2 = row.cells[2].innerHTML
                         $(cell0).css("width", "40px")
-                        
+
                         var rowDiv = `<tr>
                         <td>${cell0}</td>
                         <td class=fc-event>${cell1}</td>
@@ -78,8 +88,14 @@ $("#search-book").on("click", function () {
                         $(".reading-list").last().append(rowDiv)
                     }
                 }
+                //empty query string
                 $("#item-input").val("")
-                $('.book-modal').modal("hide");
+                //close modal window, this is bootstrap library
+                $('.book-modal').modal("hide")
+                //while closing modal windo emopty previous book list from the modal window
+                $('.book-modal').on('hidden.bs.modal', function () {
+                    $('.book-modal .modal-content .table > tbody').remove();
+                })
             })
 
 

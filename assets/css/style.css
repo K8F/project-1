@@ -18,3 +18,23 @@
 .fc-content:hover{
     background-color:#00CCFF;
 }
+#calendar{
+  background-color: #f0f0e1;
+}
+.search{
+  background-color: #e7e7e7;
+}
+
+.reading-list tbody{
+  max-height:400px;
+  overflow-y:auto;
+  display:block;
+  overflow-x: hidden;
+  
+  
+}
+
+.reading-list thead{  
+    display:block;  
+}
+

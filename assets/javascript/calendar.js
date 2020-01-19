@@ -1,10 +1,12 @@
+//add calendar objcet on page load
+
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var Draggable = FullCalendarInteraction.Draggable;
     var containerEl = document.getElementById('external-events');
     var checkbox = document.getElementById('drop-remove');
 
-    // initialize the external events
+    // initialize the external events for dorpping events to calendar
     // -----------------------------------------------------------------
 
     new Draggable(containerEl, {
@@ -16,15 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // initialize the calendar
+    // initialize the calendar object
     // -----------------------------------------------------------------
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
         defaultView: 'dayGridMonth',
         defaultDate: '2020-01-01',
-        height: 400,
-        aspectRatio: 2,
+        height: 500,
+        aspectRatio: 1,
         selectable: true,
         unselectAuto: true,
         header: {
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 $(".fc-content").append("<span class='closon'>X</span>")
             }
         },
+        //adding event directly on calendar, pops up modal windos
         select: function (info) {
             var title
             $('.event-modal').modal()
