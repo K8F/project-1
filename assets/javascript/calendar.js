@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         aspectRatio: 1,
         selectable: true,
         unselectAuto: true,
+        eventColor: '#967bb6',
         header: {
             left: 'prev,next today',
             center: 'title',

@@ -3,6 +3,12 @@
     cursor: move;
   }
 
+  .jumbotron{
+    background:  transparent url(../../assets/images/books-bookstore-book-reading.jpeg);
+    font-weight: bold;
+    color:#e7e7e7;
+  }
+
   .fc-event-container {
     position: relative;
 }
@@ -18,8 +24,13 @@
 .fc-content:hover{
     background-color:#00CCFF;
 }
+.fc-unthemed td.fc-today{
+  background:yellowgreen
+}
+
 #calendar{
-  background-color: #f0f0e1;
+  background-color:#EAECEE
+
 }
 .search{
   background-color: #e7e7e7;
