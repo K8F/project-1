@@ -79,7 +79,7 @@ function removeEventList(id) {
 ///update event after resized on calendar
 function updateEventList(id, startDate, endDate, allDay, title) {
   var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(id));
-  console.log("update event---")
+  console.log("update event---"+id+" "+startDate+endDate+allDay+title)
   queryRef.once('value', function (snapshot) {
     console.log(snapshot.val())
     snapshot.forEach(function (childSnapshot) {
@@ -124,16 +124,13 @@ database.ref("/readingList").orderByChild("readingId").once("value", function (s
 database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
   //console.log(snapshot.val());
 
-  snapshot.forEach(function (childSnapshot) {
-    console.log(childSnapshot.val().url)
-
+  snapshot.forEach(function (childSnapshot) {  
     calendar.addEvent({
       title: childSnapshot.val().title,
       start: childSnapshot.val().start,
       end: childSnapshot.val().end,
       allDay: childSnapshot.val().allDay,
       id: childSnapshot.val().eventID
-
     })
     eventId = childSnapshot.val().eventID
   })
