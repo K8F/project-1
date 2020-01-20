@@ -1,5 +1,6 @@
 //pull books from google books
 
+var readingListId=0
 $("#search-book").on("click", function () {
 
     event.preventDefault();
@@ -42,7 +43,7 @@ $("#search-book").on("click", function () {
                  }*/
                  //create new div and add each response index to div and add to modal window
                 var gifDiv = `<tr>
-                <td> <img src=${image} class="img-fluid" style=width:40px></td>
+                <td> <img src=${image} class="img-fluid" style=width:60px></td>
                 <td>${title}</td>
                 <td >${authorList}</td>                
                 <td><input type="checkbox" class='markFor-reading'></td>
@@ -70,9 +71,10 @@ $("#search-book").on("click", function () {
              //add selected books to reading list
 
             $('.book-save').on('click', function () {
-                //go though all books from the modasl window and chek checked box value and create new div for reading list addition
+                //go though all books from the modal window and check checked box value and create new div for reading list addition
                 for (var i = 0; i < tableCheckBox.length; i++) {
                     if (tableCheckBox[i].checked) {
+                        readingListId++
                         var row = tableCheckBox[i].parentNode.parentNode;
                         var cell0 = row.cells[0].innerHTML
                         var cell1 = row.cells[1].innerHTML
@@ -83,9 +85,14 @@ $("#search-book").on("click", function () {
                         <td>${cell0}</td>
                         <td class=fc-event>${cell1}</td>
                         <td>${cell2}</td>
+                        <td id=readId style=display:none>${readingListId}</td>
                          </tr>`
                         console.log(row.cells[0].innerText)
                         $(".reading-list").last().append(rowDiv)
+
+                        //update database with readinglist
+                        
+                        addReadingList(cell0,cell1,cell2,readingListId)
                     }
                 }
                 //empty query string

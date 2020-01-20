@@ -1,5 +1,7 @@
 //add calendar objcet on page load
 
+var eventId=0
+
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var Draggable = FullCalendarInteraction.Draggable;
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             {
                 title: 'All Day Event',
                 start: '2020-01-11',
-                allDay:true
+                allDay: true
             },
             {
                 title: 'Long Event',
@@ -50,14 +52,30 @@ document.addEventListener('DOMContentLoaded', function () {
         editable: true,
         droppable: true,
         drop: function (info) {
+            //get row which was dropped into calendar
+            var row = info.draggedEl.parentNode;
+            var title=row.cells[1].innerHTML
+
+            //get row id from element 3
+            var readingId=row.cells[3].innerHTML
+            console.log(readingId)
+            //increamet eventid
+            eventId++
+
             // is the "remove after drop" checkbox checked?
-            console.log("checked")
             if (checkbox.checked) {
                 // if so, remove the element from the "Draggable Events" list
-                console.log(info.draggedEl.parentNode)
+                //console.log("test test test")
+                //console.log(info.draggedEl.parentNode)
+                //console.log(row.cells[1])
+                
                 //info.draggedEl.parentNode.removeChild(info.draggedEl);
                 $(info.draggedEl.parentNode).remove()
+                removeReadingList(readingId)
+                
+
             }
+            addEvents(title, info.dateStr, info.dateStr, info.allDay,eventId)
         },
         eventClick: function (info) {
             info.jsEvent.preventDefault()
@@ -92,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //adding event directly on calendar, pops up modal windos
         select: function (info) {
             var title
+            eventId++
             $('.event-modal').modal()
             $('.modal-save').on('click', function () {
                 //console.log("modal")
@@ -102,14 +121,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: title,
                         start: info.start,
                         end: info.end
+
                     })
+                    console.log(info.start)
+                    addEvents(title, info.startStr, info.endStr, info.allDay,eventId)
                 }
                 $("#event-input").val("")
                 $('.modal').modal("hide");
 
             })
 
-                     
+            
 
         }
 
