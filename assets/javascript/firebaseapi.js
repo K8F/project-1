@@ -67,7 +67,7 @@ function removeReadingList(id) {
 
 ///read all data and add to readingList only when page is reloaded
 
-database.ref("/readingList").once("value", function (snapshot) {
+database.ref("/readingList").orderByChild("readingId").once("value", function (snapshot) {
   // console.log(snapshot.val());
 
   snapshot.forEach(function (childSnapshot) {
@@ -78,7 +78,7 @@ database.ref("/readingList").once("value", function (snapshot) {
                         <td>${childSnapshot.val().authors}</td>
                         <td id=readId style=display:none>${childSnapshot.val().readingId}</td>
                          </tr>`
-
+    readingListId = childSnapshot.val().readingId
     $(".reading-list").last().append(rowDiv)
 
   })
@@ -86,7 +86,7 @@ database.ref("/readingList").once("value", function (snapshot) {
 console.log("event load")
 
 //add event from database
-database.ref("/eventList").once("value", function (snapshot) {
+database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
   //console.log(snapshot.val());
 
   snapshot.forEach(function (childSnapshot) {
@@ -100,6 +100,7 @@ database.ref("/eventList").once("value", function (snapshot) {
       id: childSnapshot.val().eventID
 
     })
+    eventID = childSnapshot.val().eventID
   })
 })
 

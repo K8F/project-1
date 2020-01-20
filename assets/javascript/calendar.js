@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        events: [
+        /*events: [
             {
                 title: 'All Day Event',
                 start: '2020-01-11',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 end: '2020-01-10'
             },
 
-        ],
+        ],*/
         editable: true,
         droppable: true,
         drop: function (info) {
