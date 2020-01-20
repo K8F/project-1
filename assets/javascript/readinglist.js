@@ -24,8 +24,11 @@ $("#search-book").on("click", function () {
             console.log(results)
             //loop thorigh reponse object
             for (var i = 0; i < results.length; i++) {
+                var image
                 var title = results[i].volumeInfo.title
-                var image = results[i].volumeInfo.imageLinks.smallThumbnail
+                if ("imageLinks" in results[i].volumeInfo){
+                 image = results[i].volumeInfo.imageLinks.smallThumbnail}
+                 else{ image=""}
                 var authorList = results[i].volumeInfo.authors
                 /* if ("authors" in results.volumeInfo) {
                      var authors = results[i].volumeInfo.authors

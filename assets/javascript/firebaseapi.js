@@ -1,7 +1,5 @@
 //db properties
 
-
-
 var config = {
   apiKey: "AIzaSyAhyTxSPD8112Yez11tgNMcizelr1YUOdY",
   authDomain: "class-d282a.firebaseapp.com",
@@ -22,7 +20,6 @@ var database = firebase.database();
 //add reading list to db
 
 function addReadingList(imageURL, title, authors, id) {
-
   database.ref("/readingList").push({
     url: imageURL,
     title: title,
@@ -63,10 +60,7 @@ function removeReadingList(id) {
 
 
 //remove event from db once deleted from calendar
-
-
 function removeEventList(id) {
-
   var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(id));
   queryRef.once('value', function (snapshot) {
     console.log(snapshot.val())
@@ -83,9 +77,9 @@ function removeEventList(id) {
 
 
 ///update event after resized on calendar
-function updateEventList(id) {
-
+function updateEventList(id, startDate, endDate, allDay, title) {
   var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(id));
+  console.log("update event---")
   queryRef.once('value', function (snapshot) {
     console.log(snapshot.val())
     snapshot.forEach(function (childSnapshot) {
@@ -93,7 +87,7 @@ function updateEventList(id) {
       var childData = childSnapshot.val().readingId;
       console.log(childKey + " " + childData)
       database.ref("/eventList").child(childKey).update({
-        itle: title,
+        title: title,
         start: startDate,
         end: endDate,
         allDay: allDay,
@@ -124,9 +118,9 @@ database.ref("/readingList").orderByChild("readingId").once("value", function (s
 
   })
 })
-console.log("event load")
+//console.log("event load")
 
-//add event from database
+//add event from database only when page is reloaded
 database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
   //console.log(snapshot.val());
 
@@ -141,7 +135,7 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
       id: childSnapshot.val().eventID
 
     })
-    eventID = childSnapshot.val().eventID
+    eventId = childSnapshot.val().eventID
   })
 })
 

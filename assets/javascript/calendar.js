@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
         itemSelector: '.fc-event',
         eventData: function (eventEl) {
             return {
-                title: eventEl.innerText
+                title: eventEl.innerText,
+                id:eventId++
+                
             };
         }
     });
@@ -60,9 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //get row id from element 3
             var readingId = row.cells[3].innerHTML
-            console.log(readingId)
-            //increamet eventid
-            eventId++
+            //console.log(readingId)          
 
             // is the "remove after drop" checkbox checked?
             if (checkbox.checked) {
@@ -74,10 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 //info.draggedEl.parentNode.removeChild(info.draggedEl);
                 $(info.draggedEl.parentNode).remove()
                 removeReadingList(readingId)
-
-
             }
             addEvents(title, info.dateStr, info.dateStr, info.allDay, eventId)
+            console.log("event external dropped---"+eventId)
         },
         eventClick: function (info) {
             info.jsEvent.preventDefault()
@@ -110,40 +109,40 @@ document.addEventListener('DOMContentLoaded', function () {
             if (info.isEnd) {
                 $(".fc-content").append("<span class='closon'>X</span>")
             }
+            
+        },
+        eventDrop: function(info){
+            console.log("event dragged and dropped---"+info.event.id)
+            updateEventList(info.event.id,info.event.start,info.event.end,info.event.allDay,info.event.title)
+
         },
         eventResize: function (info) {
+            console.log("event resized---"+info.event.id)
+            updateEventList(info.event.id,info.event.start,info.event.end,info.event.allDay,info.event.title)
+
 
         },
         //adding event directly on calendar, pops up modal window
-        select: function (info) {
-            var title
-            eventId++
-            
+        select: function (info) { 
             //console.log('selected ' + info.startStr + ' to ' + info.endStr)
             $("#start-date").text(info.startStr)
             $("#end-date").text(info.endStr)
             $("#allDay").text(info.allDay)
-
             //open modal window
             $('.event-modal').modal()
             //unselect calendar
             calendar.unselect()
             //console.log("end of add event --------")
             // alert('selected ' + info.startStr + ' to ' + info.endStr);
-
         }
-    })
-
-    /*calendar.addEvent({
-        title:"test",
-        start: '2020-01-21',
-               allDay: true
-    })*/
-    calendar.render();
+    })  
 
     //use one event to avoid mutiple time event firing
     $('.modal').on('click', '.modal-save', function (event) {
         event.preventDefault();
+        var title
+        //increment event id
+        eventId++
         //console.log(event)       
         //console.log("in modal window count: "+modalcounter)
         title = $("#event-input").val().trim()
@@ -158,7 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 title: title,
                 start: start,
                 end: end,
-                allDay: allDay
+                allDay: allDay,
+                id:eventId
 
             })
             //console.log(info.start)
@@ -170,11 +170,12 @@ document.addEventListener('DOMContentLoaded', function () {
             $("#event-input").val("")
             $(this).removeData();
         })
-
+        console.log("event added modal---"+info.event.id)
 
     })
 
-
+//render calendar
+calendar.render();
 
 })
 
