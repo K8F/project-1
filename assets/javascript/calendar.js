@@ -118,45 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
         select: function (info) {
             var title
             eventId++
-            var modalcounter = 1
+            
             //console.log('selected ' + info.startStr + ' to ' + info.endStr)
             $("#start-date").text(info.startStr)
             $("#end-date").text(info.endStr)
             $("#allDay").text(info.allDay)
+
+            //open modal window
             $('.event-modal').modal()
-            //use one event to avoid mutiple time event firing
-            $('.modal').one('click', '.modal-save', function (event) {
-                event.preventDefault();
-                //console.log(event)
-                modalcounter++
-                //console.log("in modal window count: "+modalcounter)
-                title = $("#event-input").val().trim()
-                //$("#event-input").val("")
-                var start = $("#start-date").text()
-                var end = $("#end-date").text()
-                var allDay = $("#allDay").text()
-
-                //console.log("add event---" + title + start)
-                if (title) {
-                    calendar.addEvent({
-                        title: title,
-                        start: start,
-                        end: end,
-                        allDay: allDay
-
-                    })
-                    //console.log(info.start)
-                    addEvents(title, start, end, allDay, eventId)
-
-                }
-                $(".event-modal").modal("hide");
-                $(".event-modal").on('hidden.bs.modal', function () {
-                    $("#event-input").val("")
-                    $(this).removeData();
-                })
-
-
-            })
             //unselect calendar
             calendar.unselect()
             //console.log("end of add event --------")
@@ -172,9 +141,44 @@ document.addEventListener('DOMContentLoaded', function () {
     })*/
     calendar.render();
 
+    //use one event to avoid mutiple time event firing
+    $('.modal').on('click', '.modal-save', function (event) {
+        event.preventDefault();
+        //console.log(event)       
+        //console.log("in modal window count: "+modalcounter)
+        title = $("#event-input").val().trim()
+        //$("#event-input").val("")
+        var start = $("#start-date").text()
+        var end = $("#end-date").text()
+        var allDay = $("#allDay").text()
+
+        //console.log("add event---" + title + start)
+        if (title) {
+            calendar.addEvent({
+                title: title,
+                start: start,
+                end: end,
+                allDay: allDay
+
+            })
+            //console.log(info.start)
+            addEvents(title, start, end, allDay, eventId)
+
+        }
+        $(".event-modal").modal("hide");
+        $(".event-modal").on('hidden.bs.modal', function () {
+            $("#event-input").val("")
+            $(this).removeData();
+        })
 
 
-});
+    })
+
+
+
+})
+
+
 
 
 

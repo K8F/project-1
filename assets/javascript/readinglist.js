@@ -55,7 +55,7 @@ $("#search-book").on("click", function () {
             $('.book-modal').modal()
 
             //array of all books from the modal window table
-            var tableCheckBox = $(".book-modal .modal-content .table .markFor-reading")
+            
 
             //console.log(tableCheckBox)            
             /* $('.markFor-reading').change(function() {
@@ -68,44 +68,45 @@ $("#search-book").on("click", function () {
              });*/
 
             //logic after use select the book and click on the add to list button in modal window, 
-            //add selected books to reading list
-            //use one event to avoid multiple event firing if modal was opened multiple time
-            $('.book-save').one('click', function () {
-                //go though all books from the modal window and check checked box value and create new div for reading list addition
-                for (var i = 0; i < tableCheckBox.length; i++) {
-                    if (tableCheckBox[i].checked) {
-                        readingListId++
-                        var row = tableCheckBox[i].parentNode.parentNode;
-                        var cell0 = row.cells[0].innerHTML
-                        var cell1 = row.cells[1].innerHTML
-                        var cell2 = row.cells[2].innerHTML
-                        $(cell0).css("width", "40px")
-
-                        var rowDiv = `<tr>
-                        <td>${cell0}</td>
-                        <td class=fc-event>${cell1}</td>
-                        <td>${cell2}</td>
-                        <td id=readId style=display:none>${readingListId}</td>
-                         </tr>`
-                        console.log(row.cells[0].innerText)
-                        $(".reading-list").last().append(rowDiv)
-
-                        //update database with readinglist
-
-                        addReadingList(cell0, cell1, cell2, readingListId)
-                    }
-                }
-                //empty query string
-                $("#item-input").val("")
-                //close modal window, this is bootstrap library
-                $('.book-modal').modal("hide")
-                //while closing modal windo emopty previous book list from the modal window
-                $('.book-modal').on('hidden.bs.modal', function () {
-                    $('.book-modal .modal-content .table > tbody').remove();
-                })
-            })
-
+            //add selected books to reading list   
 
         })
 
+})
+
+
+$('.modal').on('click', '.book-save',function () {
+    var tableCheckBox = $(".book-modal .modal-content .table .markFor-reading")
+    //go though all books from the modal window and check checked box value and create new div for reading list addition
+    for (var i = 0; i < tableCheckBox.length; i++) {
+        if (tableCheckBox[i].checked) {
+            readingListId++
+            var row = tableCheckBox[i].parentNode.parentNode;
+            var cell0 = row.cells[0].innerHTML
+            var cell1 = row.cells[1].innerHTML
+            var cell2 = row.cells[2].innerHTML
+            $(cell0).css("width", "40px")
+
+            var rowDiv = `<tr>
+            <td>${cell0}</td>
+            <td class=fc-event>${cell1}</td>
+            <td>${cell2}</td>
+            <td id=readId style=display:none>${readingListId}</td>
+             </tr>`
+            console.log(row.cells[0].innerText)
+            $(".reading-list").last().append(rowDiv)
+
+            //update database with readinglist
+
+            addReadingList(cell0, cell1, cell2, readingListId)
+        }
+    }
+    //empty query string
+    $("#item-input").val("")
+    //close modal window, this is bootstrap library
+    $('.book-modal').modal("hide")
+    //while closing modal windo emopty previous book list from the modal window
+    $('.book-modal').on('hidden.bs.modal', function () {
+        $('.book-modal .modal-content .table > tbody').remove();
+    })
 })
