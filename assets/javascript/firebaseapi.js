@@ -47,20 +47,60 @@ function addEvents(title, startDate, endDate, allDay, id) {
 
 //delete reading list from db after moved to calendar if remove on check flag is checked
 function removeReadingList(id) {
-  console.log("readingid"+id)
+  console.log("readingid" + id)
   var queryRef = database.ref("/readingList").orderByChild("readingId").equalTo(parseInt(id));
 
 
-  queryRef.once('value', function(snapshot) {
+  queryRef.once('value', function (snapshot) {
     console.log(snapshot.val())
-    snapshot.forEach(function(childSnapshot) {
+    snapshot.forEach(function (childSnapshot) {
       var childKey = childSnapshot.key;
       var childData = childSnapshot.val().readingId;
-      console.log(childKey+" "+childData)
+      console.log(childKey + " " + childData)
       database.ref("/readingList").child(childKey).remove();
     })
-    
+
   })
 
-  
+
 }
+
+///read all data and add to readingList only when page is reloaded
+
+database.ref("/readingList").once("value", function (snapshot) {
+  // console.log(snapshot.val());
+
+  snapshot.forEach(function (childSnapshot) {
+    //console.log(childSnapshot.val().url)
+    var rowDiv = `<tr>
+                        <td>${childSnapshot.val().url}</td>
+                        <td class=fc-event>${childSnapshot.val().title}</td>
+                        <td>${childSnapshot.val().authors}</td>
+                        <td id=readId style=display:none>${childSnapshot.val().readingId}</td>
+                         </tr>`
+
+    $(".reading-list").last().append(rowDiv)
+
+  })
+})
+console.log("event load")
+
+//add event from database
+database.ref("/eventList").once("value", function (snapshot) {
+  //console.log(snapshot.val());
+
+  snapshot.forEach(function (childSnapshot) {
+    console.log(childSnapshot.val().url)
+
+    calendar.addEvent({
+      title: childSnapshot.val().title,
+      start: childSnapshot.val().start,
+      end: childSnapshot.val().end,
+      allDay: childSnapshot.val().allDay,
+      id: childSnapshot.val().eventID
+
+    })
+  })
+})
+
+

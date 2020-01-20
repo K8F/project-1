@@ -1,6 +1,7 @@
 //add calendar objcet on page load
 
 var eventId=0
+var calendar
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // initialize the calendar object
     // -----------------------------------------------------------------
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
         defaultView: 'dayGridMonth',
         defaultDate: '2020-01-01',
@@ -139,6 +140,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })
 
+     /*calendar.addEvent({
+         title:"test",
+         start: '2020-01-21',
+                allDay: true
+     })*/
     calendar.render();
 
 
