@@ -6,7 +6,7 @@
   .jumbotron{
     background:  transparent url(../../assets/images/books-bookstore-book-reading.jpeg);
     font-weight: bold;
-    color:#e7e7e7;
+    color:#ffffff;
   }
 
   .fc-event-container {
@@ -26,6 +26,9 @@
 }
 .fc-unthemed td.fc-today{
   background:yellowgreen
+}
+.fc-event{
+  background: #4aaaa5;
 }
 
 #calendar{
