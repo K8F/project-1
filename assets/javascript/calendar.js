@@ -1,6 +1,6 @@
 //add calendar objcet on page load
 
-var eventId=0
+var eventId = 0
 var calendar
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         height: 500,
         aspectRatio: 1,
         selectable: true,
-        unselectAuto: true,
+        //unselectAuto: true,
         eventColor: '#967bb6',
         header: {
             left: 'prev,next today',
@@ -56,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
         drop: function (info) {
             //get row which was dropped into calendar
             var row = info.draggedEl.parentNode;
-            var title=row.cells[1].innerHTML
+            var title = row.cells[1].innerHTML
 
             //get row id from element 3
-            var readingId=row.cells[3].innerHTML
+            var readingId = row.cells[3].innerHTML
             console.log(readingId)
             //increamet eventid
             eventId++
@@ -70,22 +70,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 //console.log("test test test")
                 //console.log(info.draggedEl.parentNode)
                 //console.log(row.cells[1])
-                
+
                 //info.draggedEl.parentNode.removeChild(info.draggedEl);
                 $(info.draggedEl.parentNode).remove()
                 removeReadingList(readingId)
-                
+
 
             }
-            addEvents(title, info.dateStr, info.dateStr, info.allDay,eventId)
+            addEvents(title, info.dateStr, info.dateStr, info.allDay, eventId)
         },
         eventClick: function (info) {
             info.jsEvent.preventDefault()
             //info.el.style.borderColor = 'red';
-            console.log(info.event)
+            console.log("eventclick " + info.event)
             $(".closon").on("click", function () {
-                console.log("remove")
+                console.log("remove " + info.event.id)
+                removeEventList(info.event.id)
                 info.event.remove()
+
             })
         },
         eventMouseEnter: function (info) {
@@ -109,43 +111,65 @@ document.addEventListener('DOMContentLoaded', function () {
                 $(".fc-content").append("<span class='closon'>X</span>")
             }
         },
-        //adding event directly on calendar, pops up modal windos
+        eventResize: function (info) {
+
+        },
+        //adding event directly on calendar, pops up modal window
         select: function (info) {
             var title
             eventId++
+            var modalcounter = 1
+            //console.log('selected ' + info.startStr + ' to ' + info.endStr)
+            $("#start-date").text(info.startStr)
+            $("#end-date").text(info.endStr)
+            $("#allDay").text(info.allDay)
             $('.event-modal').modal()
-            $('.modal-save').on('click', function () {
-                //console.log("modal")
-                title = $("#event-input").val()
-                console.log(title)
+            //use one event to avoid mutiple time event firing
+            $('.modal').one('click', '.modal-save', function (event) {
+                event.preventDefault();
+                //console.log(event)
+                modalcounter++
+                //console.log("in modal window count: "+modalcounter)
+                title = $("#event-input").val().trim()
+                //$("#event-input").val("")
+                var start = $("#start-date").text()
+                var end = $("#end-date").text()
+                var allDay = $("#allDay").text()
+
+                //console.log("add event---" + title + start)
                 if (title) {
                     calendar.addEvent({
                         title: title,
-                        start: info.start,
-                        end: info.end
+                        start: start,
+                        end: end,
+                        allDay: allDay
 
                     })
-                    console.log(info.start)
-                    addEvents(title, info.startStr, info.endStr, info.allDay,eventId)
+                    //console.log(info.start)
+                    addEvents(title, start, end, allDay, eventId)
+
                 }
-                $("#event-input").val("")
-                $('.modal').modal("hide");
+                $(".event-modal").modal("hide");
+                $(".event-modal").on('hidden.bs.modal', function () {
+                    $("#event-input").val("")
+                    $(this).removeData();
+                })
+
 
             })
-
-            
+            //unselect calendar
+            calendar.unselect()
+            //console.log("end of add event --------")
+            // alert('selected ' + info.startStr + ' to ' + info.endStr);
 
         }
-
-
-
     })
 
-     /*calendar.addEvent({
-         title:"test",
-         start: '2020-01-21',
-                allDay: true
-     })*/
+    /*calendar.addEvent({
+        title:"test",
+        start: '2020-01-21',
+               allDay: true
+    })*/
     calendar.render();
 
 

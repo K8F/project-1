@@ -1,6 +1,6 @@
 //pull books from google books
 
-var readingListId=0
+var readingListId = 0
 $("#search-book").on("click", function () {
 
     event.preventDefault();
@@ -41,7 +41,7 @@ $("#search-book").on("click", function () {
                          authorList = authors[0]
                      }
                  }*/
-                 //create new div and add each response index to div and add to modal window
+                //create new div and add each response index to div and add to modal window
                 var gifDiv = `<tr>
                 <td> <img src=${image} class="img-fluid" style=width:60px></td>
                 <td>${title}</td>
@@ -67,10 +67,10 @@ $("#search-book").on("click", function () {
                  console.log(arrayOfValues)
              });*/
 
-             //logic after use select the book and click on the add to list button in modal window, 
-             //add selected books to reading list
-
-            $('.book-save').on('click', function () {
+            //logic after use select the book and click on the add to list button in modal window, 
+            //add selected books to reading list
+            //use one event to avoid multiple event firing if modal was opened multiple time
+            $('.book-save').one('click', function () {
                 //go though all books from the modal window and check checked box value and create new div for reading list addition
                 for (var i = 0; i < tableCheckBox.length; i++) {
                     if (tableCheckBox[i].checked) {
@@ -91,8 +91,8 @@ $("#search-book").on("click", function () {
                         $(".reading-list").last().append(rowDiv)
 
                         //update database with readinglist
-                        
-                        addReadingList(cell0,cell1,cell2,readingListId)
+
+                        addReadingList(cell0, cell1, cell2, readingListId)
                     }
                 }
                 //empty query string

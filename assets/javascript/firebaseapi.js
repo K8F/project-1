@@ -49,8 +49,6 @@ function addEvents(title, startDate, endDate, allDay, id) {
 function removeReadingList(id) {
   console.log("readingid" + id)
   var queryRef = database.ref("/readingList").orderByChild("readingId").equalTo(parseInt(id));
-
-
   queryRef.once('value', function (snapshot) {
     console.log(snapshot.val())
     snapshot.forEach(function (childSnapshot) {
@@ -59,11 +57,54 @@ function removeReadingList(id) {
       console.log(childKey + " " + childData)
       database.ref("/readingList").child(childKey).remove();
     })
+  })
+
+}
+
+
+//remove event from db once deleted from calendar
+
+
+function removeEventList(id) {
+
+  var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(id));
+  queryRef.once('value', function (snapshot) {
+    console.log(snapshot.val())
+    snapshot.forEach(function (childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val().readingId;
+      console.log(childKey + " " + childData)
+      database.ref("/eventList").child(childKey).remove();
+    })
 
   })
 
-
 }
+
+
+///update event after resized on calendar
+function updateEventList(id) {
+
+  var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(id));
+  queryRef.once('value', function (snapshot) {
+    console.log(snapshot.val())
+    snapshot.forEach(function (childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val().readingId;
+      console.log(childKey + " " + childData)
+      database.ref("/eventList").child(childKey).update({
+        itle: title,
+        start: startDate,
+        end: endDate,
+        allDay: allDay,
+        eventID: id,
+        dateaUpdated: firebase.database.ServerValue.TIMESTAMP
+      })
+    })
+  })
+}
+
+
 
 ///read all data and add to readingList only when page is reloaded
 
