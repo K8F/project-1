@@ -5,6 +5,9 @@ var calendar
 var vstart
 var vend
 var vallDay
+var vdateStr
+var vtitle
+
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -21,8 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return {
                 title: eventEl.innerText
-
-
 
             };
         }
@@ -63,12 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
         drop: function (info) {
             //get row which was dropped into calendar
             var row = info.draggedEl.parentNode;
-            var title = row.cells[1].innerHTML
+            vtitle = row.cells[1].innerHTML
 
             //get row id from element 3
             //var readingId = row.cells[3].innerHTML
-            eventId++
 
+            vdateStr = info.dateStr
 
             // is the "remove after drop" checkbox checked?
             if (checkbox.checked) {
@@ -77,15 +78,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 removeReadingList(readingId)
             }
 
-            addEvents(title, info.dateStr, info.dateStr, info.allDay, eventId)
-            console.log("event external dropped---" + eventId)
+            //addEvents(title, info.dateStr, info.dateStr, info.allDay, eventId)
+            //console.log("event external dropped---" + eventId)
 
 
         },
         //set dropped event id
         eventReceive: function (info) {
-            console.groupCollapsed("event received--refresh page")
-            window.location.reload(true);
+            //console.groupCollapsed("event received--refresh page")
+            // console.groupCollapsed("event received--refresh page"+info.event.id)
+            eventId++
+            var allDay = info.event.allDay
+            //console.log("eventreceive title--" + vdateStr)
+            info.event.remove()
+
+            calendar.addEvent({
+                title: vtitle,
+                start: vdateStr,
+                end: vdateStr,
+                allDay: vallDay,
+                id: eventId
+
+            })
+            addEvents(vtitle, vdateStr, vdateStr, allDay, eventId)
+            //window.location.reload(true);
 
         },
         eventClick: function (info) {
@@ -164,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
         eventId++
         //console.log(event)       
         //console.log("in modal window count: "+modalcounter)
-        title = $("#event-input").val().trim()       
+        title = $("#event-input").val().trim()
         if (title) {
             calendar.addEvent({
                 title: title,
