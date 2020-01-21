@@ -25,7 +25,8 @@
     background-color:#00CCFF;
 }
 .fc-unthemed td.fc-today{
-  background:lightyellow
+  background:#2C3E50;
+  color:#fff;
 }
 .fc-event{
   background: #4aaaa5;
