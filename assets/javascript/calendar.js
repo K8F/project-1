@@ -2,6 +2,9 @@
 
 var eventId = 0
 var calendar
+var vstart
+var vend
+var vallDay
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -15,10 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
     new Draggable(containerEl, {
         itemSelector: '.fc-event',
         eventData: function (eventEl) {
+
             return {
-                title: eventEl.innerText,
-                id:eventId++
-                
+                title: eventEl.innerText
+
+
+
             };
         }
     });
@@ -29,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     calendar = new FullCalendar.Calendar(calendarEl, {
         plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
         defaultView: 'dayGridMonth',
-        defaultDate: '2020-01-01',
+        //defaultDate: '2020-01-01',
         height: 500,
         aspectRatio: 1,
         selectable: true,
@@ -61,22 +66,27 @@ document.addEventListener('DOMContentLoaded', function () {
             var title = row.cells[1].innerHTML
 
             //get row id from element 3
-            var readingId = row.cells[3].innerHTML
-            //console.log(readingId)          
+            //var readingId = row.cells[3].innerHTML
+            eventId++
+
 
             // is the "remove after drop" checkbox checked?
             if (checkbox.checked) {
-                // if so, remove the element from the "Draggable Events" list
-                //console.log("test test test")
-                //console.log(info.draggedEl.parentNode)
-                //console.log(row.cells[1])
-
-                //info.draggedEl.parentNode.removeChild(info.draggedEl);
+                // if so, remove the element from the "Draggable Events" list                
                 $(info.draggedEl.parentNode).remove()
                 removeReadingList(readingId)
             }
+
             addEvents(title, info.dateStr, info.dateStr, info.allDay, eventId)
-            console.log("event external dropped---"+eventId)
+            console.log("event external dropped---" + eventId)
+
+
+        },
+        //set dropped event id
+        eventReceive: function (info) {
+            console.groupCollapsed("event received--refresh page")
+            window.location.reload(true);
+
         },
         eventClick: function (info) {
             info.jsEvent.preventDefault()
@@ -88,6 +98,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 info.event.remove()
 
             })
+
+
         },
         eventMouseEnter: function (info) {
             //if (info.view.type == 'timeGridWeek') {
@@ -109,33 +121,40 @@ document.addEventListener('DOMContentLoaded', function () {
             if (info.isEnd) {
                 $(".fc-content").append("<span class='closon'>X</span>")
             }
-            
-        },
-        eventDrop: function(info){
-            console.log("event dragged and dropped---"+info.event.id)
-            updateEventList(info.event.id,info.event.start,info.event.end,info.event.allDay,info.event.title)
 
+        },
+        eventDrop: function (info) {
+            console.log("event dragged and dropped---" + info.event.id)
+
+            updateEventList(info.event.id, info.event.start, info.event.end, info.event.allDay, info.event.title)
+
+            console.log("event drag drop event info:" + info.event.start)
         },
         eventResize: function (info) {
-            console.log("event resized---"+info.event.id)
-            updateEventList(info.event.id,info.event.start,info.event.end,info.event.allDay,info.event.title)
+            console.log("event resized---" + info.event.id)
 
+            updateEventList(info.event.id, info.event.start, info.event.end, info.event.allDay, info.event.title)
+
+            console.log("event resize event info:" + info.event.start)
 
         },
         //adding event directly on calendar, pops up modal window
-        select: function (info) { 
-            //console.log('selected ' + info.startStr + ' to ' + info.endStr)
-            $("#start-date").text(info.startStr)
-            $("#end-date").text(info.endStr)
-            $("#allDay").text(info.allDay)
+        select: function (info) {
+            console.log('selected ' + info.startStr + ' to ' + info.endStr)
+            vstart = info.startStr
+            vend = info.endStr
+            vallDay = info.allDay
+
             //open modal window
             $('.event-modal').modal()
             //unselect calendar
             calendar.unselect()
             //console.log("end of add event --------")
             // alert('selected ' + info.startStr + ' to ' + info.endStr);
+
+            console.log("select info" + info)
         }
-    })  
+    })
 
     //use one event to avoid mutiple time event firing
     $('.modal').on('click', '.modal-save', function (event) {
@@ -145,37 +164,37 @@ document.addEventListener('DOMContentLoaded', function () {
         eventId++
         //console.log(event)       
         //console.log("in modal window count: "+modalcounter)
-        title = $("#event-input").val().trim()
-        //$("#event-input").val("")
-        var start = $("#start-date").text()
-        var end = $("#end-date").text()
-        var allDay = $("#allDay").text()
-
-        //console.log("add event---" + title + start)
+        title = $("#event-input").val().trim()       
         if (title) {
             calendar.addEvent({
                 title: title,
-                start: start,
-                end: end,
-                allDay: allDay,
-                id:eventId
+                start: vstart,
+                end: vend,
+                allDay: vallDay,
+                id: eventId
 
             })
             //console.log(info.start)
-            addEvents(title, start, end, allDay, eventId)
+            addEvents(title, vstart, vend, vallDay, eventId)
+            //reset globasl variable
+            vstart = ""
+            vend = "'"
+            vallDay = ""
+
 
         }
+
         $(".event-modal").modal("hide");
         $(".event-modal").on('hidden.bs.modal', function () {
             $("#event-input").val("")
             $(this).removeData();
         })
-        console.log("event added modal---"+info.event.id)
+
 
     })
 
-//render calendar
-calendar.render();
+    //render calendar
+    calendar.render();
 
 })
 

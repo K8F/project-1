@@ -37,10 +37,12 @@ function addEvents(title, startDate, endDate, allDay, id) {
     start: startDate,
     end: endDate,
     allDay: allDay,
-    eventID: id,
+    eventID: id,       
     dateadded: firebase.database.ServerValue.TIMESTAMP
   });
 }
+
+
 
 //delete reading list from db after moved to calendar if remove on check flag is checked
 function removeReadingList(id) {
@@ -79,7 +81,7 @@ function removeEventList(id) {
 ///update event after resized on calendar
 function updateEventList(id, startDate, endDate, allDay, title) {
   var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(id));
-  console.log("update event---"+id+" "+startDate+endDate+allDay+title)
+  console.log("update event---" + id + " " + startDate + endDate + allDay + title)
   queryRef.once('value', function (snapshot) {
     console.log(snapshot.val())
     snapshot.forEach(function (childSnapshot) {
@@ -90,8 +92,7 @@ function updateEventList(id, startDate, endDate, allDay, title) {
         title: title,
         start: startDate,
         end: endDate,
-        allDay: allDay,
-        eventID: id,
+        allDay: allDay,        
         dateaUpdated: firebase.database.ServerValue.TIMESTAMP
       })
     })
@@ -124,13 +125,13 @@ database.ref("/readingList").orderByChild("readingId").once("value", function (s
 database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
   //console.log(snapshot.val());
 
-  snapshot.forEach(function (childSnapshot) {  
+  snapshot.forEach(function (childSnapshot) {
     calendar.addEvent({
       title: childSnapshot.val().title,
       start: childSnapshot.val().start,
       end: childSnapshot.val().end,
       allDay: childSnapshot.val().allDay,
-      id: childSnapshot.val().eventID
+      id: childSnapshot.val().eventID      
     })
     eventId = childSnapshot.val().eventID
   })
