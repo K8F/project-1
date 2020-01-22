@@ -112,6 +112,7 @@ database.ref("/readingList").orderByChild("readingId").once("value", function (s
                         <td>${childSnapshot.val().url}</td>
                         <td class=fc-event>${childSnapshot.val().title}</td>
                         <td>${childSnapshot.val().authors}</td>
+                        <td><button class="btn btn-secondary btn-sm removeList">Remove</button></td>
                         <td id=readId style=display:none>${childSnapshot.val().readingId}</td>
                          </tr>`
     readingListId = childSnapshot.val().readingId

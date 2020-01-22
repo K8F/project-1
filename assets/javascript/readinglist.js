@@ -26,9 +26,10 @@ $("#search-book").on("click", function () {
             for (var i = 0; i < results.length; i++) {
                 var image
                 var title = results[i].volumeInfo.title
-                if ("imageLinks" in results[i].volumeInfo){
-                 image = results[i].volumeInfo.imageLinks.smallThumbnail}
-                 else{ image=""}
+                if ("imageLinks" in results[i].volumeInfo) {
+                    image = results[i].volumeInfo.imageLinks.smallThumbnail
+                }
+                else { image = "" }
                 var authorList = results[i].volumeInfo.authors
                 /* if ("authors" in results.volumeInfo) {
                      var authors = results[i].volumeInfo.authors
@@ -49,7 +50,7 @@ $("#search-book").on("click", function () {
                 <td> <img src=${image} class="img-fluid" style=width:60px></td>
                 <td>${title}</td>
                 <td >${authorList}</td>                
-                <td><input type="checkbox" class='markFor-reading'></td>
+                <td><input type="checkbox" class='markFor-reading'></td>                
                 </tr>`
                 $(".book-modal .modal-content .table").last().append(gifDiv)
             }
@@ -58,7 +59,7 @@ $("#search-book").on("click", function () {
             $('.book-modal').modal()
 
             //array of all books from the modal window table
-            
+
 
             //console.log(tableCheckBox)            
             /* $('.markFor-reading').change(function() {
@@ -78,7 +79,7 @@ $("#search-book").on("click", function () {
 })
 
 
-$('.modal').on('click', '.book-save',function () {
+$('.modal').on('click', '.book-save', function () {
     var tableCheckBox = $(".book-modal .modal-content .table .markFor-reading")
     //go though all books from the modal window and check checked box value and create new div for reading list addition
     for (var i = 0; i < tableCheckBox.length; i++) {
@@ -94,7 +95,8 @@ $('.modal').on('click', '.book-save',function () {
             <td>${cell0}</td>
             <td class=fc-event>${cell1}</td>
             <td>${cell2}</td>
-            <td id=readId style=display:none>${readingListId}</td>
+            <td><button class="btn btn-secondary btn-sm removeList">Remove</button></td>
+            <td id=readId style=display:none>${readingListId}</td>            
              </tr>`
             console.log(row.cells[0].innerText)
             $(".reading-list").last().append(rowDiv)
@@ -112,4 +114,23 @@ $('.modal').on('click', '.book-save',function () {
     $('.book-modal').on('hidden.bs.modal', function () {
         $('.book-modal .modal-content .table > tbody').remove();
     })
+})
+//remove reading list on remove button press
+$(".reading-list").on("click", ".removeList", function (event) {
+    event.preventDefault();  
+    var listNum = $(this)[0].parentNode.parentNode.cells[4].innerHTML
+    removeReadingList(listNum)
+    $(this)[0].parentNode.parentNode.remove()
+    console.log(listNum)
+    //anotehr way to select row and columns for that row
+    //var row = $(this).closest("tr"),        // Finds the closest row <tr> 
+    //tds = row.find("td"); // find all tds for tr
+    //console.log(row)
+
+    // $.each($(tds), function () {               // Visits every single <td> element
+    //console.log("----" + $(this).text());        // Prints out the text within the <td>
+    //});
+
+    //update databse and remove train
+
 })
