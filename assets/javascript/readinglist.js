@@ -95,7 +95,7 @@ $('.modal').on('click', '.book-save', function () {
             <td>${cell0}</td>
             <td class=fc-event>${cell1}</td>
             <td>${cell2}</td>
-            <td><button class="btn btn-secondary btn-sm removeList">Remove</button></td>
+            <td><button class="btn btn-secondary btn-sm active removeList">Remove</button></td>
             <td id=readId style=display:none>${readingListId}</td>            
              </tr>`
             console.log(row.cells[0].innerText)
