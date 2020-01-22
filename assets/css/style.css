@@ -46,7 +46,27 @@
 
 
 
+/* frontpage css*/
+#teacher-button{
+  float: right;
+  margin-bottom: 100px;
 
+}
+#main-section{
+  clear: both;
+}
+#display-book{
+  display: inline;
+}
+#book-cover{
+  background-color: gray;
+  width: 300;
+  height: 400;
+}
+
+#countdown{
+  margin-top: 100px;
+}
 
 
 
