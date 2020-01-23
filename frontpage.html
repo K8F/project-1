@@ -33,7 +33,7 @@
 
       <!--Teacher Button-->
       <div class="container">
-            <div class="row" id="teacher-button">
+            <div class="row portal">
                 <a class="btn btn-dark" href="index.html" role="button">Teacher Portal</a>
             </div> 
 
@@ -67,33 +67,34 @@
                 </div>
 
                 <!--1/3 column-->
-                <div class="col-4">
-
-                        <!--Shows bookshelf-->
-                        <div class="row" id="next-book">
-
-                        </div>
-
-                        <!--Form to submit new requests-->
-                        <div class="row" id="book-requests">
-                            <form id="request-book"></form>
-                                <label for="user-input">Reading List Requests</label>
-                
-                                <input id="add-book" type="text">
-                                <button id="add">Submit</button>
-                            </form>
-                        </div>
-
-                        <!--Displays # of days until book must be complete-->
-                        <div class="row" id="countdown">
-                            <p>abc</p>
-                        </div>
+                <div class="col-md-4 search">
+                    <div>
+                    <p><strong>Reading Wishlist</strong></p>
+                    <p><sub>Something you want to read? Use this form to ask your teacher.</sub>
+                    </p>
                     </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="item-input">Search Book</label>
+                            <input type="text" id="item-input">
+                            <label for="number-input"># of Results</label>
+                            <input type="number" id="number-input" value=10>
+    
+
+                            <!-- Button triggers new Item to be added -->
+                            <input id="search-book" type="submit" class="btn btn-primary" value="Search">
+                        </div>
+    
+                    </form>
+
+                </div>
 
                 </div>
             </div>
     
 <script src="assets/javascript/app.js"></script>   
-<script src="assets/javascript/giphyapi.js"></script> 
+<script src="assets/javascript/readinglist.js"></script>
+<script src="assets/javascript/firebaseapi.js"></script>
+<script src="assets/javascript/calendar.js"></script>
 </body>
 </html>
