@@ -26,6 +26,8 @@ $("#search-book").on("click", function () {
             for (var i = 0; i < results.length; i++) {
                 var image
                 var title = results[i].volumeInfo.title
+                var isbn13=results[i].volumeInfo.industryIdentifiers[1].identifier
+                //console.log("isbn from modal---"+isbn13)
                 if ("imageLinks" in results[i].volumeInfo) {
                     image = results[i].volumeInfo.imageLinks.smallThumbnail
                 }
@@ -50,7 +52,8 @@ $("#search-book").on("click", function () {
                 <td> <img src=${image} class="img-fluid" style=width:60px></td>
                 <td>${title}</td>
                 <td >${authorList}</td>                
-                <td><input type="checkbox" class='markFor-reading'></td>                
+                <td><input type="checkbox" class='markFor-reading'></td>  
+                <td id=isbn_13_10 style=display:none>${isbn13}</td>               
                 </tr>`
                 $(".book-modal .modal-content .table").last().append(gifDiv)
             }
@@ -89,6 +92,7 @@ $('.modal').on('click', '.book-save', function () {
             var cell0 = row.cells[0].innerHTML
             var cell1 = row.cells[1].innerHTML
             var cell2 = row.cells[2].innerHTML
+            var cell3= row.cells[4].innerHTML           
             $(cell0).css("width", "40px")
 
             var rowDiv = `<tr>
@@ -96,14 +100,15 @@ $('.modal').on('click', '.book-save', function () {
             <td class=fc-event>${cell1}</td>
             <td>${cell2}</td>
             <td><button class="btn btn-secondary btn-sm active removeList">Remove</button></td>
-            <td id=readId style=display:none>${readingListId}</td>            
+            <td id=readId style=display:none>${readingListId}</td>   
+            <td id=isbn_13_10 style=display:none>${cell3}</td>          
              </tr>`
             console.log(row.cells[0].innerText)
             $(".reading-list").last().append(rowDiv)
 
             //update database with readinglist
 
-            addReadingList(cell0, cell1, cell2, readingListId)
+            addReadingList(cell0, cell1, cell2, readingListId,cell3)
         }
     }
     //empty query string

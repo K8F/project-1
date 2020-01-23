@@ -19,25 +19,27 @@ var database = firebase.database();
 
 //add reading list to db
 
-function addReadingList(imageURL, title, authors, id) {
+function addReadingList(imageURL, title, authors, id,isbn) {
   database.ref("/readingList").push({
     url: imageURL,
     title: title,
     authors: authors,
     readingId: id,
+    isbn:isbn,
     dateadded: firebase.database.ServerValue.TIMESTAMP
   });
 }
 
 
 //add event to database
-function addEvents(title, startDate, endDate, allDay, id) {
+function addEvents(title, startDate, endDate, allDay, id,isbn) {
   database.ref("/eventList").push({
     title: title,
     start: startDate,
     end: endDate,
     allDay: allDay,
-    eventID: id,       
+    eventID: id,  
+    isbn:isbn,     
     dateadded: firebase.database.ServerValue.TIMESTAMP
   });
 }
@@ -114,6 +116,7 @@ database.ref("/readingList").orderByChild("readingId").once("value", function (s
                         <td>${childSnapshot.val().authors}</td>
                         <td><button class="btn btn-secondary btn-sm active removeList">Remove</button></td>
                         <td id=readId style=display:none>${childSnapshot.val().readingId}</td>
+                        <td id=isbn_13_10 style=display:none>${childSnapshot.val().isbn}</td>  
                          </tr>`
     readingListId = childSnapshot.val().readingId
     $(".reading-list").last().append(rowDiv)

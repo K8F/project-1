@@ -7,6 +7,7 @@ var vend
 var vallDay
 var vdateStr
 var vtitle
+var visbn
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -65,7 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
             //get row which was dropped into calendar
             var row = info.draggedEl.parentNode;
             vtitle = row.cells[1].innerHTML
-
+            visbn = row.cells[5].innerHTML
+            console.log("isbn---"+visbn)
             //get row id from element 3
             //var readingId = row.cells[3].innerHTML
 
@@ -97,10 +99,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 start: vdateStr,
                 end: vdateStr,
                 allDay: vallDay,
-                id: eventId
+                id: eventId                
 
             })
-            addEvents(vtitle, vdateStr, vdateStr, allDay, eventId)
+            addEvents(vtitle, vdateStr, vdateStr, allDay, eventId,visbn)
             //window.location.reload(true);
 
         },
@@ -191,7 +193,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             })
             //console.log(info.start)
-            addEvents(title, vstart, vend, vallDay, eventId)
+            visbn=""
+            addEvents(title, vstart, vend, vallDay, eventId,visbn)
             //reset globasl variable
             vstart = ""
             vend = "'"
