@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reading is Fun!</title>
 
-    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -86,15 +85,33 @@
                         </div>
     
                     </form>
-
+                    <div class="modal hide fade book-modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <table class="table table-sm">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">Check for adding to Reading List</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary book-save">Add to list</button>
+            ​
+                                </div>
                 </div>
 
                 </div>
             </div>
-    
-<script src="assets/javascript/app.js"></script>   
+
+<script src="assets/javascript/app.js"></script>
 <script src="assets/javascript/readinglist.js"></script>
-<script src="assets/javascript/firebaseapi.js"></script>
 <script src="assets/javascript/calendar.js"></script>
+<script src="assets/javascript/firebaseapi.js"></script>
 </body>
 </html>
