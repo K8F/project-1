@@ -9,7 +9,6 @@ var vdateStr
 var vtitle
 var visbn
 
-
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
     var Draggable = FullCalendarInteraction.Draggable;
@@ -72,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //var readingId = row.cells[3].innerHTML
 
             vdateStr = info.dateStr
+            
 
             // is the "remove after drop" checkbox checked?
             if (checkbox.checked) {
@@ -100,11 +100,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 end: vdateStr,
                 allDay: vallDay,
                 id: eventId                
-
+            
             })
             addEvents(vtitle, vdateStr, vdateStr, allDay, eventId,visbn)
             //window.location.reload(true);
-
+            
         },
         eventClick: function (info) {
             info.jsEvent.preventDefault()
@@ -215,7 +215,8 @@ document.addEventListener('DOMContentLoaded', function () {
     //render calendar
     calendar.render();
 
-})
+});
+
 
 
 

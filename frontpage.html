@@ -38,7 +38,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="index.html">Teacher Portal <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link active" id="teachers-only" href="index.html">Teacher Portal <span class="sr-only">(current)</span></a>
           </div>
         </div>
       </nav>
@@ -54,23 +54,22 @@
 
                         <!--Displays cover for the book student is currently reading-->
                         <div id="book-cover">
-
+                            </div>
+                             <!--Button student clicks when book is finished-->
+                             <div>
+                        <button type="button" class="btn btn-dark" id="finished-book">Finished Book</button>
                         </div>
 
                         <!--Displays short description for the book the student is currently reading-->
-                        <div id="book-description">
-                            <p>text text text blah blah blah</p>
-                        </div>
-
-                        <!--Button student clicks when book is finished-->
-                        <button type="button" class="btn btn-dark" >Finished Book</button>
+                       
+                    </div>
+                       
 
                         <!--Displays gif when student clicks finished button-->
                         <div id="display-gif">
 
                         </div>
                     </div> 
-                </div>
 
                 <!--1/3 column-->
                 <div class="col-md-4 search">
@@ -115,6 +114,7 @@
 
                 </div>
             </div>
+        </div>
         </div>
 
 <script src="assets/javascript/readinglist.js"></script>
