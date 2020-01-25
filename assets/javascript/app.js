@@ -258,9 +258,6 @@ $("#finished-book").on("click", function () {
     ///pull gif
 
     
-
-
-    
     console.log("on button")
     //var newSearch = $("#item-input").val().trim();
 
@@ -282,10 +279,11 @@ $("#finished-book").on("click", function () {
                 }
                 else { image = "" }
                 //create new div and add each response index to div and add to modal window
-                var gifDiv = `<tr>
+                var gifDiv = $(image)
+                /*`<tr>
                     <td> <img src=${image} class="img-fluid" style=width:60px></td>             
                     <td><input type="radio" class='markFor-stickers'></td>              
-                    </tr>`
+                    </tr>`*/
                 $(".sticker-modal .modal-content .table").last().append(gifDiv)
             }
             //show modal window, this is bootstrap library
@@ -296,11 +294,6 @@ $("#finished-book").on("click", function () {
                 $("input:radio").not(":checked").attr("disabled", bol);
             });
         })
-
-
-
-
-
 
 
 })

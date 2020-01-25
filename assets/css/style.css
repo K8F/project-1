@@ -100,11 +100,11 @@ body {
   background-color: red;
 }
 ​
-.sticker-list {
+/* .sticker-list {
   align-items: center;
   flex-wrap: wrap;
   display: inline;
-}
+} */
 ​
 .shadow {
   -moz-box-shadow:    5px 5px 7px 8px #ccc;
@@ -112,10 +112,10 @@ body {
   box-shadow:         5px 5px 7px 8px #ccc;
 }
 ​
-.sticker-list {
+/* .sticker-list {
   width: 400px;
   height: 400px;
-}
+} */
 ​
 #teacher-button{
 float: right;

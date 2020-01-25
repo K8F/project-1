@@ -70,3 +70,17 @@ $('.modal').on('click', '.sticker-save', function () {
         $('.sticker-modal .modal-content .table > tbody').remove();
     })
 })
+
+
+database.ref("/stickersdb01253").orderByChild("stickerId").once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      var rowDiv = childSnapshot.val().url
+      
+      /*`<tr>
+                          <td>${childSnapshot.val().url}</td>
+                          <td id=stickId style=display:none>${childSnapshot.val().stickerId}</td>
+                           </tr>`*/
+      stickerListId = childSnapshot.val().stickerId
+      $(".sticker-list").last().append(rowDiv)
+    })
+  })
