@@ -8,6 +8,7 @@ var vallDay
 var vdateStr
 var vtitle
 var visbn
+var vimgURL=""
 
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
@@ -66,7 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
             var row = info.draggedEl.parentNode;
             vtitle = row.cells[1].innerHTML
             visbn = row.cells[5].innerHTML
-            console.log("isbn---"+visbn)
+            vimgURL=row.cells[0].innerHTML
+            vimgURL= $(vimgURL).attr('src')
+            
+            
+            console.log("image---"+vimgURL)
             //get row id from element 3
             //var readingId = row.cells[3].innerHTML
 
@@ -99,10 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 start: vdateStr,
                 end: vdateStr,
                 allDay: vallDay,
-                id: eventId                
-            
+                id: eventId
+                                
+
             })
-            addEvents(vtitle, vdateStr, vdateStr, allDay, eventId,visbn)
+            addEvents(vtitle, vdateStr, vdateStr, allDay, eventId,visbn,vimgURL)
             //window.location.reload(true);
             
         },
@@ -194,11 +200,13 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             //console.log(info.start)
             visbn=""
-            addEvents(title, vstart, vend, vallDay, eventId,visbn)
+            vimgURL=""
+            addEvents(title, vstart, vend, vallDay, eventId,visbn,vimgURL)
             //reset globasl variable
             vstart = ""
-            vend = "'"
+            vend = ""
             vallDay = ""
+            
 
 
         }

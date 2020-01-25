@@ -19,27 +19,29 @@ var database = firebase.database();
 
 //add reading list to db
 
-function addReadingList(imageURL, title, authors, id,isbn) {
+function addReadingList(imageURL, title, authors, id, isbn) {
   database.ref("/readingList").push({
     url: imageURL,
     title: title,
     authors: authors,
     readingId: id,
-    isbn:isbn,
+    isbn: isbn,
     dateadded: firebase.database.ServerValue.TIMESTAMP
   });
 }
 
 
 //add event to database
-function addEvents(title, startDate, endDate, allDay, id,isbn) {
+function addEvents(title, startDate, endDate, allDay, id, isbn, imgURL) {
   database.ref("/eventList").push({
     title: title,
     start: startDate,
     end: endDate,
     allDay: allDay,
-    eventID: id,  
-    isbn:isbn,     
+    eventID: id,
+    isbn: isbn,
+    completed: 'No',
+    imgURL: imgURL,
     dateadded: firebase.database.ServerValue.TIMESTAMP
   });
 }
@@ -88,13 +90,13 @@ function updateEventList(id, startDate, endDate, allDay, title) {
     console.log(snapshot.val())
     snapshot.forEach(function (childSnapshot) {
       var childKey = childSnapshot.key;
-      var childData = childSnapshot.val().readingId;
+      var childData = childSnapshot.val().eventID;
       console.log(childKey + " " + childData)
       database.ref("/eventList").child(childKey).update({
         title: title,
         start: startDate,
         end: endDate,
-        allDay: allDay,        
+        allDay: allDay,
         dateaUpdated: firebase.database.ServerValue.TIMESTAMP
       })
     })
@@ -127,17 +129,18 @@ database.ref("/readingList").orderByChild("readingId").once("value", function (s
 
 //add event from database only when page is reloaded
 database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
-  //console.log(snapshot.val());
-
+  //console.log(snapshot.val());  
   snapshot.forEach(function (childSnapshot) {
     calendar.addEvent({
       title: childSnapshot.val().title,
       start: childSnapshot.val().start,
       end: childSnapshot.val().end,
       allDay: childSnapshot.val().allDay,
-      id: childSnapshot.val().eventID      
+      id: childSnapshot.val().eventID
     })
     eventId = childSnapshot.val().eventID
+
+    
   })
 })
 

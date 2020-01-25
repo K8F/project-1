@@ -1,21 +1,21 @@
 //psuedo code
 //===============================================================================
 //current book
-    //when a book is in progress on the calendar, book image is appended to the frontpage #book-cover
-    //on click, book goes to newly rendered page with samples from the current book reading
-    //when reader finishes book, message pops up: "you are done! yay!"
-    //if a new book is already queued , message goes away and book shows up
-    //else if message added: "stay posted! a new book will be on the list soon"
-    ​
-    ​
-    //book wishlist    
-        //student can search for book
-        //renders 3 results automatically
-        //on click-- list shows up
-        //student selects books they want to add to wishlist
-        //when student submits books they are added to the backend
-//==============================================================================
+//when a book is in progress on the calendar, book image is appended to the frontpage #book-cover
+//on click, book goes to newly rendered page with samples from the current book reading
+//when reader finishes book, message pops up: "you are done! yay!"
+//if a new book is already queued , message goes away and book shows up
+//else if message added: "stay posted! a new book will be on the list soon"
 
+
+//book wishlist    
+//student can search for book
+//renders 3 results automatically
+//on click-- list shows up
+//student selects books they want to add to wishlist
+//when student submits books they are added to the backend
+//==============================================================================
+/*
 var currentBook;//whichever book is currently being read, based on time
 var image=results[i].volumneinfo.imagelinks.thumbnail
 
@@ -50,14 +50,14 @@ for (i = 0; i < currentBook.length; i++) {
 
     }  
   
-
+*/
 
 
 
 
 //book wishilist
-    //student can search for a book, on-click--list shows up
-    //student sleects the book(s) they want to add to the wishlist
+//student can search for a book, on-click--list shows up
+//student sleects the book(s) they want to add to the wishlist
 // var readingListId
 // ​
 //define databse
@@ -70,15 +70,15 @@ var config = {
     messagingSenderId: "631653290831",
     appId: "1:631653290831:web:1af5b714141ec17310ab3a",
     measurementId: "G-3K1R5SSWYR"
-  };
-  
-  //initialize database
-  
-  firebase.initializeApp(config);
-  // Create a variable to reference the database
-  var database = firebase.database();
-​
-​console.log(database)
+};
+
+//initialize database
+
+firebase.initializeApp(config);
+// Create a variable to reference the database
+var database = firebase.database();
+
+console.log(database)
 // ​
 // //pull books from google books
 // ​
@@ -112,7 +112,7 @@ var config = {
 //                 }
 //                 else { image = "" }
 //                 var authorList = results[i].volumeInfo.authors
-    
+
 //                 //create new div and add each response index to div and add to modal window
 //                 var gifDiv = `<tr>
 //                 <td> <img src=${image} class="img-fluid" style=width:60px></td>
@@ -168,12 +168,12 @@ var config = {
 // ​
 // database.ref("/readingList").orderByChild("readingId").limitToLast(1).once("value", function (snapshot) {
 //     // console.log(snapshot.val());
-  
+
 //     snapshot.forEach(function (childSnapshot) {
 //              //console.log(childSnapshot.val().url)   
 //       readingListId = childSnapshot.val().readingId
-      
-  
+
+
 //     })
 //   })
 // //add reading list to database
@@ -187,3 +187,75 @@ var config = {
 //       dateadded: firebase.database.ServerValue.TIMESTAMP
 //     });
 //   }
+
+///firebase call to get current book image
+database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
+    //console.log(snapshot.val());
+    var bookAdded = "No"
+    console.log("test book--")
+    snapshot.forEach(function (childSnapshot) {
+        eventId = childSnapshot.val().eventID
+        var completed = childSnapshot.val().completed
+        console.log(completed)
+        if (completed == "No" && bookAdded == "No") {
+            console.log("image url----" + childSnapshot.val().imgURL)
+            var newDiv = `<div>
+       <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
+       <p id=current-id style=display:none>${eventId}</p> 
+       </div>`
+            $("#book-cover").append(newDiv)
+            bookAdded = "Yes"
+
+        }
+    })
+})
+
+
+$("#finished-book").on("click", function () {
+
+
+    var currentId = $("#current-id").text()
+
+    console.log("id--------" + currentId);
+    var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(currentId));
+
+    queryRef.once('value', function (snapshot) {
+        console.log(snapshot.val())
+        snapshot.forEach(function (childSnapshot) {
+            var childKey = childSnapshot.key;
+            var childData = childSnapshot.val().eventID;
+            console.log(childKey + " " + childData)
+            database.ref("/eventList").child(childKey).update({
+                completed: "Yes",
+                dateaUpdated: firebase.database.ServerValue.TIMESTAMP
+            })
+        })
+
+        $("#book-cover").empty()
+    })
+
+    database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
+        var bookAdded = "No"
+        console.log("test book--")
+        snapshot.forEach(function (childSnapshot) {
+            eventId = childSnapshot.val().eventID
+            var completed = childSnapshot.val().completed
+            console.log(completed)
+            if (completed == "No" && bookAdded == "No") {
+                console.log("image url----" + childSnapshot.val().imgURL)
+                var newDiv = `<div>
+       <img src=${childSnapshot.val().imgURL} class=img-fluid>
+       <p id=current-id style=display:none>${eventId}</p> 
+       </div>`
+                $("#book-cover").append(newDiv)
+                bookAdded = "Yes"
+
+            }
+        })
+    })
+
+})
+
+
+
+
