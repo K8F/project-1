@@ -1,32 +1,137 @@
-#external-events .fc-event {
-    margin: 1em 0;
-    cursor: move;
-  }
-
-  .fc-event-container {
-    position: relative;
+body {
+	background-image: url(../../assets/images/blue-snow.png);
+}
+.jumbotron {
+  background:  transparent url(../../assets/images/books-bookstore-book-reading.jpeg);
+  font-weight: bold;
+  color:#ffffff;
 }
 
-  .closon {
-    position: absolute;
-    top: -2px;
-    right: 0;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #FFF;
+.row {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+/* .footer-zone {
+	background-color: #666666;
+	width: 100%;
+	height: 32px;
+	opacity: 0;
+}
+
+.footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	background-color: navy;
+	width: 100%;
+	font-size: 12px;
+	text-align: center;
+	padding: 10px 0px;
+	color: darkgrey;
+	margin-top: 30px;
+	border-top: 6px solid whitesmoke;
+} */
+
+#external-events .fc-event {
+  margin: 1em 0;
+  cursor: move;
+}
+
+
+.fc-event-container {
+  position: relative;
+}
+
+.closon {
+  position: absolute;
+  top: -2px;
+  right: 0;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #FFF;
 }
 .fc-content:hover{
-    background-color:#00CCFF;
+  background-color:#00CCFF;
+}
+.fc-unthemed td.fc-today{
+background:#b1d6fa;
+color:#fff;
+}
+.fc-event{
+background: #4aaaa5;
+}
+
+#calendar{
+background-color:#EAECEE
+
+}
+.search{
+background-color: #e7e7e7;
+}
+.scroll-y{
+max-height:400px;
+overflow-y:auto;
+}
+
+
+
+/* frontpage css*/
+#teacher-button{
+float: right;
+margin-bottom: 100px;
+
+}
+#main-section{
+clear: both;
+}
+#display-book{
+display: inline;
+}
+#book-cover{
+background-color: gray;
+width: 300;
+height: 400;
+}
+
+#countdown{
+margin-top: 100px;
 }
 
 .box {
-  background-color: #00CCFF;
-  font-style: italic; 
+  background: #C9FFBF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFAFBD, #C9FFBF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
   padding-left: 30px;
   padding-right: 30px;
   padding-top: 40px;
   padding-bottom: 40px;
   margin: 10px;
-  border: 6px solid rgb(70, 70, 70);
   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.shadow {
+  -moz-box-shadow:    5px 5px 7px 8px #ccc;
+  -webkit-box-shadow: 5px 5px 7px 8px #ccc;
+  box-shadow:         5px 5px 7px 8px #ccc;
+}
+
+@media (max-width: 980px) {
+    .jumbotron .row .footer-zone .footer {
+      width: 100%;
+    }
+}
+    
+    @media (max-width: 768px) {
+      .jumbotron .row .footer-zone .footer {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .jumbotron .row .footer-zone .footer {
+        width: 100%;
+      }
+
+    }
