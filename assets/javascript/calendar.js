@@ -200,11 +200,13 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             //console.log(info.start)
             visbn=""
-            addEvents(title, vstart, vend, vallDay, eventId,visbn)
+            vimgURL=""
+            addEvents(title, vstart, vend, vallDay, eventId,visbn,vimgURL)
             //reset globasl variable
             vstart = ""
-            vend = "'"
+            vend = ""
             vallDay = ""
+            
 
 
         }
