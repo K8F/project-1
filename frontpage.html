@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,6 +36,8 @@
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
+
+
 </head>
 
 <body>
@@ -63,7 +66,7 @@
         <div class="row" id="main-section">
 
             <!--2/3 column-->
-            <div class="col-8">
+            <div class="col-md-4">
 
                 <!--Section for current book and anmiation when student finishes book-->
                 <div id="current-book">
@@ -87,6 +90,22 @@
                 </div>
             </div>
 
+            <!-- Ian's Changes -->
+            <div class="col-md-4 ">
+
+                <div  id="stickertable" style="background: #C9FFBF;
+                background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  
+                background: linear-gradient(to right, #FFAFBD, #C9FFBF); 
+                background-color: #e7e7e7;
+                 overflow: auto;
+                 height: 100%;
+                 width: 100%;">
+                    <p class="text-center"><strong>KEEP UP THE GOOD WORK!</strong></p>   
+                    <div class="sticker-list"></div>
+                </div>
+
+            </div>
+
             <!--1/3 column-->
             <div class="col-md-4 search">
                 <div>
@@ -107,35 +126,62 @@
                     </div>
 
                 </form>
-                <div class="modal hide fade book-modal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <table class="table table-sm">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Author</th>
-                                        <th scope="col">Check for adding to Reading List</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary book-save">Add to list</button>
-                                ​
-                            </div>
-                        </div>
 
+
+            </div>
+        </div>
+
+        <div class="modal hide fade book-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Check for adding to Reading List</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary book-save">Add to list</button>
+                        ​
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        ​
+        <div class="modal hide fade sticker-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Add Sticker!</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary sticker-save">Add to list</button>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="assets/javascript/app.js"></script>
-        <script src="assets/javascript/readinglist.js"></script>
-        <script src="assets/javascript/calendar.js"></script>
-        <script src="assets/javascript/firebaseapi.js"></script>
+    </div>
+
 </body>
+
+<script src="assets/javascript/app.js"></script>
+<script src="assets/javascript/stickerlistian1.js"></script>
+<script src="assets/javascript/readinglist.js"></script>
+<script src="assets/javascript/calendar.js"></script>
+<script src="assets/javascript/firebaseapi.js"></script>
 
 </html>

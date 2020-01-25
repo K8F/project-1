@@ -213,7 +213,7 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
 
 $("#finished-book").on("click", function () {
 
-
+    event.preventDefault();
     var currentId = $("#current-id").text()
 
     console.log("id--------" + currentId);
@@ -253,6 +253,55 @@ $("#finished-book").on("click", function () {
             }
         })
     })
+
+
+    ///pull gif
+
+    
+
+
+    
+    console.log("on button")
+    //var newSearch = $("#item-input").val().trim();
+
+    var queryURL = "https://api.giphy.com/v1/stickers/search?q=" + "emoji" + "&api_key=7yWWp89zKr3OvZfcBlWP0GZ6POxKBpIg&rating=G&limit=15&tag=happy";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+        .then(function (response) {
+            var results = response.data;
+            console.log(results)
+            //loop thorigh reponse object
+            for (var i = 0; i < results.length; i++) {
+                var image
+                //console.log("isbn from modal---"+isbn13)
+                if ("fixed_height_still" in results[i].images) {
+                    image = results[i].images.fixed_height_still.url
+                }
+                else { image = "" }
+                //create new div and add each response index to div and add to modal window
+                var gifDiv = `<tr>
+                    <td> <img src=${image} class="img-fluid" style=width:60px></td>             
+                    <td><input type="radio" class='markFor-stickers'></td>              
+                    </tr>`
+                $(".sticker-modal .modal-content .table").last().append(gifDiv)
+            }
+            //show modal window, this is bootstrap library
+            $('.sticker-modal').modal()
+            //allow only one sticker to be selected
+            $("input:radio").click(function () {
+                var bol = $("input:radio:checked").length >= 1;
+                $("input:radio").not(":checked").attr("disabled", bol);
+            });
+        })
+
+
+
+
+
+
 
 })
 

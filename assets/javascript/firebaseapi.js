@@ -145,3 +145,29 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
 })
 
 
+//sticket storage
+
+//add stickerList to db
+function addStickerList(imageURL, id) {
+  database.ref("/stickersdb01253").push({
+    url: imageURL,
+    stickerId: id,
+    dateadded: firebase.database.ServerValue.TIMESTAMP
+  });
+}
+
+
+//sticker read
+
+///read all data and add to stickerList only when page is reloaded
+database.ref("/stickersdb01253").orderByChild("stickerId").once("value", function (snapshot) {
+  snapshot.forEach(function (childSnapshot) {
+    var rowDiv = `<tr>
+                        <td>${childSnapshot.val().url}</td>
+                        <td id=stickId style=display:none>${childSnapshot.val().stickerId}</td>
+                         </tr>`
+    stickerListId = childSnapshot.val().stickerId
+    $(".sticker-list").last().append(rowDiv)
+  })
+})
+
