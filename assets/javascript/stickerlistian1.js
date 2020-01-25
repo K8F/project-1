@@ -25,16 +25,16 @@ $("#finished-book").on("click", function () {
                 //create new div and add each response index to div and add to modal window
                 var gifDiv = `<tr>
                 <td> <img src=${image} class="img-fluid" style=width:60px></td>             
-                <td><input type="checkbox" class='markFor-stickers'></td>              
+                <td><input type="radio" class='markFor-stickers'></td>              
                 </tr>`
                 $(".sticker-modal .modal-content .table").last().append(gifDiv)   
             }
             //show modal window, this is bootstrap library
             $('.sticker-modal').modal() 
             //allow only one sticker to be selected
-            $("input:checkbox").click(function() {
-                var bol = $("input:checkbox:checked").length >= 1;     
-                $("input:checkbox").not(":checked").attr("disabled",bol);
+            $("input:radio").click(function() {
+                var bol = $("input:radio:checked").length >= 1;     
+                $("input:radio").not(":checked").attr("disabled",bol);
                 });
         })
 })
@@ -45,19 +45,20 @@ $('.modal').on('click', '.sticker-save', function () {
     for (var i = 0; i < tableCheckBox.length; i++) {
         if (tableCheckBox[i].checked) {
             stickerListId++
-            var row = tableCheckBox[i].parentNode.parentNode;
-            var cell0 = row.cells[0].innerHTML    
-            $(cell0).css("width", "40px")
+            var sticks = tableCheckBox[i].parentNode.parentNode;
+            var stick1 = sticks.cells[0].innerHTML    
+            $(stick1).css("width", "40px")
 
-            var rowDiv = `<tr>
-            <td>${cell0}</td>
+            var sticksDiv = `<tr>
+            <td>${stick1}</td>
             <td id=stickId style=display:none>${stickerListId}</td>        
              </tr>`
-            console.log(row.cells[0].title)
-            $(".sticker-list").last().append(rowDiv)
+            console.log(sticks.cells[0].title)
+            console.log(sticksDiv)
+            $(".sticker-list").last().append(stick1)
 
             //update database with stickerlist
-            addStickerList(cell0, stickerListId)
+            addStickerList(stick1, stickerListId)
         }
     }
     //empty query string
