@@ -32,14 +32,16 @@ function addReadingList(imageURL, title, authors, id,isbn) {
 
 
 //add event to database
-function addEvents(title, startDate, endDate, allDay, id,isbn) {
+function addEvents(title, startDate, endDate, allDay, id,isbn,imgURL) {
   database.ref("/eventList").push({
     title: title,
     start: startDate,
     end: endDate,
     allDay: allDay,
     eventID: id,  
-    isbn:isbn,     
+    isbn:isbn,   
+    completed: 'No',  
+    imgURL: imgURL,
     dateadded: firebase.database.ServerValue.TIMESTAMP
   });
 }
