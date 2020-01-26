@@ -1,10 +1,17 @@
 
     body {
-        background-image: url("https://cdn.pixabay.com/photo/2014/09/11/18/32/books-441866__340.jpg") !important;
-        
-            font-family: "times new roman"; 
+        background-image: url("https://files.slack.com/files-pri/TQ2R0N5C4-FSSMYGF5Z/blue-snow.png") !important;
 
-            color: black;
-}
+        font-family: "times new roman";
+
+        color: black;
+        }
+        
+        .jumbotron {
+            background: transparent url("css/images/books-bookstore-book-reading.jpeg");
+            font-weight: bold;
+            color: #ffffff;
+        }
+            
 
 

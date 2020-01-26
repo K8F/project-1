@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html public "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 ​
 
@@ -22,9 +26,9 @@
     ​
     <div class="container">
         <div class="jumbotron text-center">
-            <h1 class="display-4">Reading is Fun!</h1>
-            <p class="lead">A Reading library for the whole family</p>
+            <h1 class="display-4 align-middle mt-5 text-dark">Reading is Fun!</h1>
         </div>
+        
         <table class="table">
             <thead>
                 <tr>
@@ -81,15 +85,17 @@
         location.href = "www.yoursite.com";
     };
 </script>
+<script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+
 ​
 <script>
     const button = document.querySelector(".btn-primary");
     const isbn = document.querySelector(".isbn");
     const auto = document.querySelector(".auto");
 
-    button.addEventListener("click", initialiase);
+    button.addEventListener("click",initialiase);
 
-    // google.books.load({ "language": "en" });
+     google.books.load({ "language": "en" });
 
     function nextStep(viewer) {
         window.setTimeout(function () {
@@ -104,7 +110,7 @@
 
     function initialiase() {
         var viewer = new google.books.DefaultViewer(document.getElementById("viewerCanvas"));
-        viewer.load("ISBN:" + isbn.value, alertNotFound);
+        viewer.load("ISBN:" + isbn.value,alertNotFound);
         auto.addEventListener("click", nextStep(viewer));
     }
 
