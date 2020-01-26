@@ -11,11 +11,16 @@ var config = {
   measurementId: "G-3K1R5SSWYR"
 };
 
-//initialize database
+//initialize database, first check it is already initialized
 
-firebase.initializeApp(config);
-// Create a variable to reference the database
-var database = firebase.database();
+if (!firebase.apps.length) {
+
+
+  firebase.initializeApp(config);
+  // Create a variable to reference the database
+  var database = firebase.database();
+
+}
 
 //add reading list to db
 
@@ -140,34 +145,9 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
     })
     eventId = childSnapshot.val().eventID
 
-    
+
   })
 })
 
 
-//sticket storage
-
-//add stickerList to db
-function addStickerList(imageURL, id) {
-  database.ref("/stickersdb01253").push({
-    url: imageURL,
-    stickerId: id,
-    dateadded: firebase.database.ServerValue.TIMESTAMP
-  });
-}
-
-
-//sticker read
-
-///read all data and add to stickerList only when page is reloaded
-database.ref("/stickersdb01253").orderByChild("stickerId").once("value", function (snapshot) {
-  snapshot.forEach(function (childSnapshot) {
-    var rowDiv = `<tr>
-                        <td>${childSnapshot.val().url}</td>
-                        <td id=stickId style=display:none>${childSnapshot.val().stickerId}</td>
-                         </tr>`
-    stickerListId = childSnapshot.val().stickerId
-    $(".sticker-list").last().append(rowDiv)
-  })
-})
 

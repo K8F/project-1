@@ -188,53 +188,12 @@ console.log(database)
 //     });
 //   }
 
-///firebase call to get current book image
-database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
-    //console.log(snapshot.val());
-    var bookAdded = "No"
-    console.log("test book--")
-    snapshot.forEach(function (childSnapshot) {
-        eventId = childSnapshot.val().eventID
-        var completed = childSnapshot.val().completed
-        console.log(completed)
-        if (completed == "No" && bookAdded == "No") {
-            console.log("image url----" + childSnapshot.val().imgURL)
-            var newDiv = `<div>
-       <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
-       <p id=current-id style=display:none>${eventId}</p> 
-       </div>`
-            $("#book-cover").append(newDiv)
-            bookAdded = "Yes"
-
-        }
-    })
-})
 
 
-$("#finished-book").on("click", function () {
 
-    event.preventDefault();
-    var currentId = $("#current-id").text()
-
-    console.log("id--------" + currentId);
-    var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(currentId));
-
-    queryRef.once('value', function (snapshot) {
-        console.log(snapshot.val())
-        snapshot.forEach(function (childSnapshot) {
-            var childKey = childSnapshot.key;
-            var childData = childSnapshot.val().eventID;
-            console.log(childKey + " " + childData)
-            database.ref("/eventList").child(childKey).update({
-                completed: "Yes",
-                dateaUpdated: firebase.database.ServerValue.TIMESTAMP
-            })
-        })
-
-        $("#book-cover").empty()
-    })
-
+    ///firebase call to get current book image
     database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
+        //console.log(snapshot.val());
         var bookAdded = "No"
         console.log("test book--")
         snapshot.forEach(function (childSnapshot) {
@@ -244,7 +203,7 @@ $("#finished-book").on("click", function () {
             if (completed == "No" && bookAdded == "No") {
                 console.log("image url----" + childSnapshot.val().imgURL)
                 var newDiv = `<div>
-       <img src=${childSnapshot.val().imgURL} class=img-fluid>
+       <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
        <p id=current-id style=display:none>${eventId}</p> 
        </div>`
                 $("#book-cover").append(newDiv)
@@ -255,48 +214,91 @@ $("#finished-book").on("click", function () {
     })
 
 
-    ///pull gif
+    $("#finished-book").on("click", function () {
 
-    
-    console.log("on button")
-    //var newSearch = $("#item-input").val().trim();
+        event.preventDefault();
+        var currentId = $("#current-id").text()
 
-    var queryURL = "https://api.giphy.com/v1/stickers/search?q=" + "emoji" + "&api_key=7yWWp89zKr3OvZfcBlWP0GZ6POxKBpIg&rating=G&limit=15&tag=happy";
+        console.log("id--------" + currentId);
+        var queryRef = database.ref("/eventList").orderByChild("eventID").equalTo(parseInt(currentId));
 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-        .then(function (response) {
-            var results = response.data;
-            console.log(results)
-            //loop thorigh reponse object
-            for (var i = 0; i < results.length; i++) {
-                var image
-                //console.log("isbn from modal---"+isbn13)
-                if ("fixed_height_still" in results[i].images) {
-                    image = results[i].images.fixed_height_still.url
+        queryRef.once('value', function (snapshot) {
+            console.log(snapshot.val())
+            snapshot.forEach(function (childSnapshot) {
+                var childKey = childSnapshot.key;
+                var childData = childSnapshot.val().eventID;
+                console.log(childKey + " " + childData)
+                database.ref("/eventList").child(childKey).update({
+                    completed: "Yes",
+                    dateaUpdated: firebase.database.ServerValue.TIMESTAMP
+                })
+            })
+
+            $("#book-cover").empty()
+        })
+
+        database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
+            var bookAdded = "No"
+            console.log("test book--")
+            snapshot.forEach(function (childSnapshot) {
+                eventId = childSnapshot.val().eventID
+                var completed = childSnapshot.val().completed
+                console.log(completed)
+                if (completed == "No" && bookAdded == "No") {
+                    console.log("image url----" + childSnapshot.val().imgURL)
+                    var newDiv = `<div>
+       <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
+       <p id=current-id style=display:none>${eventId}</p> 
+       </div>`
+                    $("#book-cover").append(newDiv)
+                    bookAdded = "Yes"
+
                 }
-                else { image = "" }
-                //create new div and add each response index to div and add to modal window
-                var gifDiv = $(image)
-                /*`<tr>
-                    <td> <img src=${image} class="img-fluid" style=width:60px></td>             
-                    <td><input type="radio" class='markFor-stickers'></td>              
-                    </tr>`*/
-                $(".sticker-modal .modal-content .table").last().append(gifDiv)
-            }
-            //show modal window, this is bootstrap library
-            $('.sticker-modal').modal()
-            //allow only one sticker to be selected
-            $("input:radio").click(function () {
-                var bol = $("input:radio:checked").length >= 1;
-                $("input:radio").not(":checked").attr("disabled", bol);
-            });
+            })
         })
 
 
-})
+        ///pull gif
+
+
+        console.log("on button")
+        //var newSearch = $("#item-input").val().trim();
+
+        var queryURL = "https://api.giphy.com/v1/stickers/search?q=" + "emoji" + "&api_key=7yWWp89zKr3OvZfcBlWP0GZ6POxKBpIg&rating=G&limit=15&tag=happy";
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        })
+            .then(function (response) {
+                var results = response.data;
+                console.log(results)
+                //loop thorigh reponse object
+                for (var i = 0; i < results.length; i++) {
+                    var image
+                    console.log("in loop---")
+                    if ("fixed_height_still" in results[i].images) {
+                        image = results[i].images.fixed_height_still.url
+                    }
+                    else { image = "" }
+                    //create new div and add each response index to div and add to modal window
+                    var gifDiv = `<tr>
+                        <td> <img src=${image} class="img-fluid" style=width:60px></td>             
+                        <td><input type="radio" class='markFor-stickers'></td>              
+                        </tr>`
+                    $(".sticker-modal .modal-content .table").last().append(gifDiv)
+                }
+                //show modal window, this is bootstrap library
+                $('.sticker-modal').modal()
+                //allow only one sticker to be selected
+                $("input:radio").click(function () {
+                    var bol = $("input:radio:checked").length >= 1;
+                    $("input:radio").not(":checked").attr("disabled", bol);
+                });
+            })
+
+
+    })
 
 
 
