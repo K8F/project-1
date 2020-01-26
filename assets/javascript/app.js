@@ -245,6 +245,7 @@ console.log(database)
             console.log("test book--")
             snapshot.forEach(function (childSnapshot) {
                 eventId = childSnapshot.val().eventID
+                isbn=childSnapshot.val().isbn
                 var completed = childSnapshot.val().completed
                 var dueDate=childSnapshot.val().end
                 var displayDueDate=moment(dueDate).format("dddd, MMMM Do");
@@ -266,7 +267,6 @@ console.log(database)
                     <p> There are no more books to read. Check back next week for something new.</p>
                     </div>`
                     $("#book-cover").append(newDiv);
-
                 }
                 
 
