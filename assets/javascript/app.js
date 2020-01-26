@@ -199,16 +199,19 @@ console.log(database)
         snapshot.forEach(function (childSnapshot) {
             eventId = childSnapshot.val().eventID
             var completed = childSnapshot.val().completed
+            var dueDate=childSnapshot.val().end
+            var displayDueDate=moment(dueDate).format("dddd, MMMM Do YYYY");
             console.log(completed)
             if (completed == "No" && bookAdded == "No") {
                 console.log("image url----" + childSnapshot.val().imgURL)
                 var newDiv = `<div>
-       <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
-       <p id=current-id style=display:none>${eventId}</p> 
-       </div>`
+                    <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
+                    <p id=current-id style=display:none>${eventId}</p> 
+                    <h5> Due Date:</h5>
+                    <p> ${displayDueDate}</p>  
+                    </div>`
                 $("#book-cover").append(newDiv)
                 bookAdded = "Yes"
-
             }
         })
     })

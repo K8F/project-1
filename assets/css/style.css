@@ -52,7 +52,6 @@
   display: inline;
 }
 #book-cover{
-  background-color: gray;
   width: 300;
   height: 400;
 }
@@ -128,12 +127,6 @@ clear: both;
 
 #display-book{
 display: inline;
-}
-
-#book-cover{
-background-color: gray;
-width: 300;
-height: 400;
 }
 ​
 #countdown{
