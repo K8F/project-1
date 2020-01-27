@@ -48,7 +48,6 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
         var dueDate = childSnapshot.val().end
         var displayDueDate = moment(dueDate).format("dddd, MMMM Do");
         console.log(completed)
-        $("#no-books").show();
         if (completed == "No" && bookAdded == "No") {
             $("#no-books").hide();
             console.log("image url----" + childSnapshot.val().imgURL)
@@ -62,12 +61,7 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
             bookAdded = "Yes"
         }
 
-    });
-    if ($("#elementId").length === null){
-        $("#no-books").show();
-    }
-
-   
+    });   
 
 });
 
@@ -93,6 +87,8 @@ $("#finished-book").on("click", function () {
         })
 
         $("#book-cover").empty()
+        $("#no-books").show();
+
     })
 
     database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
@@ -120,9 +116,7 @@ $("#finished-book").on("click", function () {
                 bookAdded = "Yes"
             }
 
-            if ($("#elementId").length === null){
-                $("#no-books").show();
-            }
+    
 
         })
 
@@ -174,6 +168,8 @@ $("#finished-book").on("click", function () {
 
 
 })
+
+
 
 
 
