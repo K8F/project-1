@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reading is Fun!</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!--Bootstrap javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <!--fullcalendar api link -->
+    <link href='fullcalendar-4.3.1/packages/core/main.css' rel='stylesheet' />
+    <link href='fullcalendar-4.3.1/packages/daygrid/main.css' rel='stylesheet' />
+    <link href='fullcalendar-4.3.1/packages/list/main.css' rel='stylesheet' />
+    <link href='fullcalendar-4.3.1/packages/timegrid/main.css' rel='stylesheet' />
+
+    <script src='fullcalendar-4.3.1/packages/core/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/daygrid/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/list/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/timegrid/main.js'></script>
+    <script src='fullcalendar-4.3.1/packages/interaction/main.js'></script>
+
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+
+    <!--Moment.js references-->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <!--Page Heading-->
+        <div class="jumbotron">
+            <h1 class="text-center">Reading is Fun!</h1>
+        </div>
+
+        <!--Teacher Button-->
+        <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" id="teachers-only" href="index.html">Teacher Portal <span
+                            class="sr-only">(current)</span></a>
+                </div>
+            </div>
+        </nav>
+        </div>
+
+
+        <!--Main Body-->
+        <div class="row" id="main-section">
+
+            <!--2/3 column-->
+            <div class="col-md-4">
+
+                <!--Section for current book and anmiation when student finishes book-->
+                <div id="no-books">
+                    <strong> You're ahead of the game!</strong>
+                    <p> There are no more books to read. Check back next week for something new.</p>
+                    </div>
+                <div id="current-book">
+
+                    <!--Displays cover for the book student is currently reading-->
+                    <div id="book-cover">
+                
+                    </div>
+                    <!--Button student clicks when book is finished-->
+                    <div>
+                        <button type="button" class="btn btn-dark" id="finished-book">Finished Book</button>
+                    </div>
+
+                    <!--Displays short description for the book the student is currently reading-->
+
+                </div
+
+
+                <!--Displays gif when student clicks finished button-->
+                <div id="display-gif">
+
+                </div>
+            </div>
+
+            <!-- Ian's Changes -->
+            <div class="col-md-4 ">
+
+                <div id="stickertable" style="background: #C9FFBF;
+                background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  
+                background: linear-gradient(to right, #FFAFBD, #C9FFBF); 
+                background-color: #e7e7e7;
+                 overflow: auto;
+                 height: 100%;
+                 width: 100%;">
+                    <p class="text-center"><strong>Sticker Board!</strong></p>
+                    <div class="sticker-list"></div>
+                </div>
+
+            </div>
+
+            <!--1/3 column-->
+            <div class="col-md-4 search">
+                <div>
+                    <p><strong>Something you want to read? </strong></p>
+                    <p><sub>Use this form to ask your teacher.</sub>
+                    </p>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label for="item-input">Search Book</label>
+                        <input type="text" id="item-input">
+                        <label for="number-input"># of Results</label>
+                        <input type="number" id="number-input" value=10>
+
+
+                        <!-- Button triggers new Item to be added -->
+                        <input id="search-book" type="submit" class="btn btn-dark" value="Search">
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+
+        <div class="modal hide fade book-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Check for adding to Reading List</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary book-save">Add to list</button>
+                        ​
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        ​
+        <div class="modal hide fade sticker-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <table class="table table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Add Sticker!</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary sticker-save">Add to list</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="assets/javascript/app.js"></script>
+<script src="assets/javascript/stickerlistian1.js"></script>
+<script src="assets/javascript/readinglist.js"></script>
+<script src="assets/javascript/calendar.js"></script>
+<script src="assets/javascript/firebaseapi.js"></script>
+
+
+</html>

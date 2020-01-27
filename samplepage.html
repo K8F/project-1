@@ -1,0 +1,125 @@
+<!DOCTYPE html public "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+​
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Sample Current Book</title>
+</head>
+​
+
+<body>
+    <!--style="background:('/images/download.html')"-->
+    <!-- <script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script> -->
+    ​
+    <!-- https: //pixabay.com/photos/shelf-bookcase-library-bookstore-3195135/ -->
+    <div></div>
+    ​
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-4 align-middle mt-5 text-dark">Reading is Fun!</h1>
+        </div>
+
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light" style="float:right">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="frontpage.html" style="float:right;">Student Portal <span class="sr-only">(current)</span></a>
+                    
+                  </div>
+                </div>
+              </nav>
+            </div>
+        
+        ​
+        <class="bg-light">
+            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+            <title>Google Books Embedded Viewer API</title>
+            ​
+            ​
+            <div class="container">
+                <h1 class="display-4 align-middle mt-5 text-dark">Reading library</h1>
+            </div>
+            ​
+            <div class="container mt-5 p-3 border-0">
+                <div class="card text-white bg-dark mb-3 float-left shadow-lg" style="max-width: 20rem;">
+                    <div class="card-header">Bookshelf</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Type your ISBN below</h4>
+                        <input type="text" class="form-control isbn" placeholder="Enter your isbn">
+                        <button class="btn btn-primary mt-2 mb-2">Start Reading</button>
+                        <button class="btn btn-light auto">Auto-turn</button>
+                        <p class="card-text">Reading is to mind what exercise is to the body</p>
+                    </div>
+                </div>
+            </div>
+            ​
+            ​
+            <div id="viewerCanvas" style="width: 800px; height: 800px" class="mr-3 float-right"></div>
+</body>
+​
+​
+​
+​
+</script>
+<button id="myButton" class="float-left submit-button">previous page</button>
+​
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "www.yoursite.com";
+    };
+</script>
+​<button id="myButton" class="float-right submit-button">next page</button>
+​
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "www.yoursite.com";
+    };
+</script>
+<script type="text/javascript" src="https://www.google.com/books/jsapi.js"></script>
+
+​
+<script>
+    const button = document.querySelector(".btn-primary");
+    const isbn = document.querySelector(".isbn");
+    const auto = document.querySelector(".auto");
+
+    button.addEventListener("click",initialiase);
+
+     google.books.load({ "language": "en" });
+
+    function nextStep(viewer) {
+        window.setTimeout(function () {
+            viewer.nextPage()
+            nextStep(viewer);
+        }, 3000)
+    }
+
+    function alertNotFound() {
+        alert("Book not found!");
+    }
+
+    function initialiase() {
+        var viewer = new google.books.DefaultViewer(document.getElementById("viewerCanvas"));
+        viewer.load("ISBN:" + isbn.value,alertNotFound);
+        auto.addEventListener("click", nextStep(viewer));
+    }
+
+    google.books.setOnLoadCallback(initialiase);
+
+</script>
+​
+
+</html>
