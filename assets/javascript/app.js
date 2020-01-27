@@ -116,10 +116,7 @@ $("#finished-book").on("click", function () {
                 bookAdded = "Yes"
             }
 
-    
-
         })
-
 
 
     });

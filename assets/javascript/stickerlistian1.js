@@ -38,7 +38,7 @@ $('.modal').on('click', '.sticker-save', function () {
 
 //add stickerList to db
 function addStickerList(imageURL, id) {
-    database.ref("/stickersdb01253").push({
+    database.ref("/stickersdb01279").push({
         url: imageURL,
         stickerId: id,
         dateadded: firebase.database.ServerValue.TIMESTAMP
@@ -49,7 +49,7 @@ function addStickerList(imageURL, id) {
 //sticker read
 
 ///read all data and add to stickerList only when page is reloaded
-database.ref("/stickersdb01253").orderByChild("stickerId").once("value", function (snapshot) {
+database.ref("/stickersdb01279").orderByChild("stickerId").once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         var rowDiv = childSnapshot.val().url
         // `<tr>
