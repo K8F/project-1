@@ -7,9 +7,7 @@ $("#search-book").on("click", function () {
     console.log("on button")
     var newSearch = $("#item-input").val().trim();
     var numOfSearch = $("#number-input").val()
-    //var config = {headers: {"X-Requested-With" : "XMLHttpRequest"}};
-    //var queryURL = "http://cors-anywhere.herokuapp.com/https://www.goodreads.com/search.xml?" +
-    //  "key=PJr6weMgv3J21iNRTVcafQ&q="+newSearch +"&limit=10"
+   
 
     var queryURL = "https://www.googleapis.com/books/v1/volumes?q=" + newSearch + "&maxResults=" + numOfSearch
 
@@ -26,27 +24,14 @@ $("#search-book").on("click", function () {
             for (var i = 0; i < results.length; i++) {
                 var image
                 var title = results[i].volumeInfo.title
-                var isbn13=results[i].volumeInfo.industryIdentifiers[1].identifier
+                var isbn13 = results[i].volumeInfo.industryIdentifiers[1].identifier
                 //console.log("isbn from modal---"+isbn13)
                 if ("imageLinks" in results[i].volumeInfo) {
                     image = results[i].volumeInfo.imageLinks.smallThumbnail
                 }
                 else { image = "" }
                 var authorList = results[i].volumeInfo.authors
-                /* if ("authors" in results.volumeInfo) {
-                     var authors = results[i].volumeInfo.authors
- 
-                     console.log(authors.length)
-                     
-                     if (authors.length > 1) {
-                         for (var j = 0; j < authors.length; j++) {
-                             authorList = authorList + "," + authors[j]
-                         }
-                     }
-                     else {
-                         authorList = authors[0]
-                     }
-                 }*/
+
                 //create new div and add each response index to div and add to modal window
                 var gifDiv = `<tr>
                 <td> <img src=${image} class="img-fluid" style=width:60px></td>
@@ -92,7 +77,7 @@ $('.modal').on('click', '.book-save', function () {
             var cell0 = row.cells[0].innerHTML
             var cell1 = row.cells[1].innerHTML
             var cell2 = row.cells[2].innerHTML
-            var cell3= row.cells[4].innerHTML           
+            var cell3 = row.cells[4].innerHTML
             $(cell0).css("width", "40px")
 
             var rowDiv = `<tr>
@@ -108,7 +93,7 @@ $('.modal').on('click', '.book-save', function () {
 
             //update database with readinglist
 
-            addReadingList(cell0, cell1, cell2, readingListId,cell3)
+            addReadingList(cell0, cell1, cell2, readingListId, cell3)
         }
     }
     //empty query string
@@ -122,20 +107,10 @@ $('.modal').on('click', '.book-save', function () {
 })
 //remove reading list on remove button press
 $(".reading-list").on("click", ".removeList", function (event) {
-    event.preventDefault();  
+    event.preventDefault();
     var listNum = $(this)[0].parentNode.parentNode.cells[4].innerHTML
     removeReadingList(listNum)
     $(this)[0].parentNode.parentNode.remove()
     console.log(listNum)
-    //anotehr way to select row and columns for that row
-    //var row = $(this).closest("tr"),        // Finds the closest row <tr> 
-    //tds = row.find("td"); // find all tds for tr
-    //console.log(row)
-
-    // $.each($(tds), function () {               // Visits every single <td> element
-    //console.log("----" + $(this).text());        // Prints out the text within the <td>
-    //});
-
-    //update databse and remove train
 
 })

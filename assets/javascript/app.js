@@ -40,17 +40,24 @@ console.log(database)
 ///firebase call to get current book image
 database.ref("/eventList").orderByChild("eventID").once("value", function (snapshot) {
     //console.log(snapshot.val());
+    //by default bookAdded="No"; this is one check to ensure that a book is removed from the loop after it's displayed
     var bookAdded = "No"
     console.log("test book--")
     snapshot.forEach(function (childSnapshot) {
+        //event ID is used to cycle through the array of books
         eventId = childSnapshot.val().eventID
+        //default completed =="No"; this is the second check to ensure that a books removed from the loop after it's displayed; changes to "Yes" when user clicks Finish Book button
         var completed = childSnapshot.val().completed
         var dueDate = childSnapshot.val().end
+        //formats the due date so that it is readable
         var displayDueDate = moment(dueDate).format("dddd, MMMM Do");
         console.log(completed)
+        //filters for books that have not been read or already displayed on the page
         if (completed == "No" && bookAdded == "No") {
+            //hides div telling readers there are no more books to read
             $("#no-books").hide();
             console.log("image url----" + childSnapshot.val().imgURL)
+            //creates div to show book image
             var newDiv = `<div id=elementID>
                     <img src=${childSnapshot.val().imgURL} class=img-fluid style="width: 100%"; "height: 100%">
                     <p id=current-id style=display:none>${eventId}</p> 
@@ -65,7 +72,7 @@ database.ref("/eventList").orderByChild("eventID").once("value", function (snaps
 
 });
 
-
+//when the user clicks Finished Book button...
 $("#finished-book").on("click", function () {
 
     event.preventDefault();
