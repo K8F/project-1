@@ -3,6 +3,12 @@
     cursor: move;
   }
 
+  .jumbotron{
+    background:  transparent url(../../assets/images/books-bookstore-book-reading.jpeg);
+    font-weight: bold;
+    color:#ffffff;
+  }
+
   .fc-event-container {
     position: relative;
 }
@@ -18,6 +24,7 @@
 .fc-content:hover{
     background-color:#00CCFF;
 }
+<<<<<<< HEAD
 
 
 
@@ -27,6 +34,29 @@
   margin-bottom: 100px;
 
 }
+=======
+.fc-unthemed td.fc-today{
+  background:#b1d6fa;
+  color:#fff;
+}
+.fc-event{
+  background: #4aaaa5;
+}
+
+#calendar{
+  background-color:#EAECEE
+
+}
+.search{
+  background-color: #e7e7e7;
+}
+.scroll-y{
+  max-height:400px;
+  overflow-y:auto;
+}
+
+/* frontpage css*/
+>>>>>>> kate_dev_branch
 #main-section{
   clear: both;
 }
@@ -34,12 +64,108 @@
   display: inline;
 }
 #book-cover{
+<<<<<<< HEAD
   background-color: gray;
+=======
+>>>>>>> kate_dev_branch
   width: 300;
   height: 400;
 }
 
+<<<<<<< HEAD
 #countdown{
   margin-top: 100px;
 =======
 }
+=======
+#current-book{
+  margin: auto;
+}
+
+#countdown{
+  margin-top: 100px;
+}
+
+/* frontpage css*/
+body {
+	background-image: url(../../assets/images/blue-snow.png);
+}
+
+​
+.footer {
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	background-color: lightblue;
+	width: 100%;
+	font-size: 14px;
+	text-align: center;
+	padding: 10px 0px;
+	color: yellow;
+	margin-top: 30px;
+	border-top: 6px solid lightyellow;
+} 
+​
+/* #stickertable {
+  background: #C9FFBF;  /* fallback for old browsers */
+ /*background: -webkit-linear-gradient(to right, #FFAFBD, #C9FFBF);  /* Chrome 10-25, Safari 5.1-6 */
+ /*background: linear-gradient(to right, #FFAFBD, #C9FFBF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  /* background-color: #e7e7e7;
+  overflow: auto;
+  height: 400px;
+  width: 400px; 
+  
+} */
+
+#stickertable{
+  background-color: red;
+}
+​
+/* .sticker-list {
+  align-items: center;
+  flex-wrap: wrap;
+  display: inline;
+} */
+​
+.shadow {
+  -moz-box-shadow:    5px 5px 7px 8px #ccc;
+  -webkit-box-shadow: 5px 5px 7px 8px #ccc;
+  box-shadow:         5px 5px 7px 8px #ccc;
+}
+​
+/* .sticker-list {
+  width: 400px;
+  height: 400px;
+} */
+​
+#teacher-button{
+float: right;
+margin-bottom: 100px;
+}
+
+#main-section{
+clear: both;
+}
+
+#display-book{
+display: inline;
+}
+​
+#countdown{
+margin-top: 100px;
+}
+​
+.shadow {
+  -moz-box-shadow:    5px 5px 7px 8px #ccc;
+  -webkit-box-shadow: 5px 5px 7px 8px #ccc;
+  box-shadow:         5px 5px 7px 8px #ccc;
+}
+
+.navbar{
+  float:right;
+}
+
+
+
+
+>>>>>>> kate_dev_branch
